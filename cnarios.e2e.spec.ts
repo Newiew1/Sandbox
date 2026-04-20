@@ -60,7 +60,7 @@ test.describe('Cnarios E2E User Workflows', () => {
 
     // Step 3: Verify challenge page loaded with content
     await page.waitForURL('**/challenges/product-filtering');
-    const challengeTitle = page.locator('h1, text=E-commerce');
+    const challengeTitle = page.locator('h1').first();
     await expect(challengeTitle).toBeVisible({ timeout: 10000 });
 
     await browser.close();
