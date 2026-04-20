@@ -1,11 +1,12 @@
 import { test, expect, chromium } from '@playwright/test';
 
-// E2E Regression Pack for Cnarios - Real end-to-end user workflows.
+// E2E Regression Pack for Cnarios - designed for User Acceptance Testing.
+// Includes critical business-flow validations and can be extended as needed.
 
-test.describe('Cnarios E2E User Workflows', () => {
-  
-  test('Complete user journey: Home → Explore → View Challenge', async () => {
-    const browser = await chromium.launch({ channel: 'chrome', headless: false });
+test.describe('Cnarios E2E Regression', () => {
+  test('home and main navigation paths', async () => {
+    const browser = await chromium.launch({ channel: 'chrome', headless: true });
+    const page = await browser.newPage();
     const page = await browser.newPage();
 
     // Step 1: User lands on home
