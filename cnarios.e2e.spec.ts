@@ -1,6 +1,6 @@
 import { test, expect, chromium } from '@playwright/test';
 
-// E2E Regression Pack for Cnarios - Real end-to-end user workflows
+// E2E Regression Pack for Cnarios - Real end-to-end user workflows.
 
 test.describe('Cnarios E2E User Workflows', () => {
   
