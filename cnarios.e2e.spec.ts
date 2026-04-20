@@ -2,10 +2,11 @@ import { test, expect, chromium } from '@playwright/test';
 
 // E2E Regression Pack for Cnarios - designed for User Acceptance Testing.
 // Includes critical business-flow validations and can be extended as needed.
-
+// I am testing a git pull request
 test.describe('Cnarios E2E Regression', () => {
   test('home and main navigation paths', async () => {
     const browser = await chromium.launch({ channel: 'chrome', headless: true });
+    const page = await browser.newPage();
     const page = await browser.newPage();
 
     await page.goto('https://www.cnarios.com/');
