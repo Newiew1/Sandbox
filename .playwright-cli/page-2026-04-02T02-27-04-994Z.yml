@@ -1,0 +1,129 @@
+- generic [ref=e3]:
+  - generic:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "cnarios logo" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "cnarios logo" [ref=e8]
+        - generic [ref=e9]:
+          - link "Features" [ref=e10] [cursor=pointer]:
+            - /url: /#features
+          - link "How it works?" [ref=e11] [cursor=pointer]:
+            - /url: /#how-it-works
+          - link "Contact Us" [ref=e12] [cursor=pointer]:
+            - /url: /#contact-us
+          - link "Blogs" [ref=e13] [cursor=pointer]:
+            - /url: /blogs
+    - navigation
+  - main [ref=e14]:
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - heading "Practice Automation Testing the Way It Happens in the Real World" [level=1] [ref=e18]
+        - paragraph [ref=e19]: Cnarios is a free platform for testers to practice automation using real-life scenarios, industry-standard test cases, and bug-finding challenges. Learn concepts, sharpen your skills, and prepare for interviews — all in one place.
+        - generic [ref=e20]:
+          - link "Start Exploring" [ref=e21] [cursor=pointer]:
+            - /url: /explore
+            - button "Start Exploring" [ref=e22]
+          - link "Challenges" [ref=e23] [cursor=pointer]:
+            - /url: /challenges
+            - button "Challenges" [ref=e24]
+      - img "Automation Illustration" [ref=e26]
+  - generic [ref=e27]:
+    - paragraph [ref=e28]: features
+    - generic [ref=e29]:
+      - link "Practice real world scenarios image Hands-On Practice Master automation by practicing every possible real-world scenario." [ref=e30] [cursor=pointer]:
+        - /url: /concepts
+        - img "Practice real world scenarios image" [ref=e31]
+        - heading "Hands-On Practice" [level=3] [ref=e32]
+        - paragraph [ref=e33]: Master automation by practicing every possible real-world scenario.
+      - link "interview questions image Interview Questions Prepare smarter with real interview-style questions and challenges." [ref=e34] [cursor=pointer]:
+        - /url: /interview-questions
+        - img "interview questions image" [ref=e35]
+        - heading "Interview Questions" [level=3] [ref=e36]
+        - paragraph [ref=e37]: Prepare smarter with real interview-style questions and challenges.
+      - link "Challenges image Test Your Skills Face challenges and interview questions to prepare for the real world." [ref=e38] [cursor=pointer]:
+        - /url: /challenges
+        - img "Challenges image" [ref=e39]
+        - heading "Test Your Skills" [level=3] [ref=e40]
+        - paragraph [ref=e41]: Face challenges and interview questions to prepare for the real world.
+  - generic [ref=e42]:
+    - paragraph [ref=e43]: How it works?
+    - generic [ref=e45]:
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e49]: "1"
+          - generic [ref=e50]:
+            - paragraph [ref=e51]: Search for the topic you want to master
+            - paragraph [ref=e52]: Go to explore section → Click on / search the topic you want to learn
+        - img "Search Illustration" [ref=e54]
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - generic [ref=e58]: "2"
+          - generic [ref=e59]:
+            - paragraph [ref=e60]: Understand the Concept
+            - paragraph [ref=e61]: Read the on point description about the topic and also real-world examples with visuals
+        - img "Reading Illustration" [ref=e63]
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - generic [ref=e67]: "3"
+          - generic [ref=e68]:
+            - paragraph [ref=e69]: Practice the Scenario
+            - paragraph [ref=e70]: Practice the meaningful scenarios what actual automation engineers automate with proper testcases including positive and negative scenarios.
+        - img "Practice Illustration" [ref=e72]
+  - generic [ref=e73]:
+    - heading "Share. Suggest. Shape." [level=4] [ref=e74]
+    - paragraph [ref=e75]: Whether it's a broken flow, a cool suggestion, or your favorite interview challenge — we're all ears.
+    - link "Drop Us a Line" [ref=e76] [cursor=pointer]:
+      - /url: mailto:cnaarios@gmail.com?subject=Hello%20from%20Your%20Automation%20Playground&body=Hi%20team%2C%0A%0AI%20wanted%20to%20share%2Fsuggest...
+      - img [ref=e78]
+      - text: Drop Us a Line
+  - contentinfo [ref=e80]:
+    - separator [ref=e81]
+    - generic [ref=e82]:
+      - link "cnarios logo" [ref=e84] [cursor=pointer]:
+        - /url: /
+        - img "cnarios logo" [ref=e85]
+      - generic [ref=e86]:
+        - generic [ref=e87]:
+          - heading "Concepts" [level=6] [ref=e88]
+          - generic [ref=e89]:
+            - link "Iframes" [ref=e90] [cursor=pointer]:
+              - /url: /concepts/iframe
+            - link "Multi Window" [ref=e91] [cursor=pointer]:
+              - /url: /concepts/multiwindow
+            - link "Links" [ref=e92] [cursor=pointer]:
+              - /url: /concepts/links
+            - link "Table" [ref=e93] [cursor=pointer]:
+              - /url: /concepts/table
+        - generic [ref=e94]:
+          - heading "Challenges" [level=6] [ref=e95]
+          - generic [ref=e96]:
+            - link "E-commerce Pagination" [ref=e97] [cursor=pointer]:
+              - /url: /challenges/product-listing-pagination
+            - link "E-commerce Filters" [ref=e98] [cursor=pointer]:
+              - /url: /challenges/product-filtering
+        - generic [ref=e99]:
+          - heading "Blogs" [level=6] [ref=e100]
+          - generic [ref=e101]:
+            - link "HTML Basics" [ref=e102] [cursor=pointer]:
+              - /url: /blogs/html-basics
+            - link "Locator Strategies" [ref=e103] [cursor=pointer]:
+              - /url: /blogs/Locators
+      - generic [ref=e105]:
+        - link "LinkedIn" [ref=e106] [cursor=pointer]:
+          - /url: https://www.linkedin.com/company/cnarios
+          - img [ref=e107]
+          - text: LinkedIn
+        - link "YouTube" [ref=e109] [cursor=pointer]:
+          - /url: https://www.youtube.com/channel/UC2F8fdGwKP18tyqEKtGRxeg
+          - img [ref=e110]
+          - text: YouTube
+        - link "Email" [ref=e112] [cursor=pointer]:
+          - /url: mailto:cnaarios.@gmail.com
+          - img [ref=e113]
+          - text: Email
+    - paragraph [ref=e117]:
+      - text: © 2026 Cnarios. All rights reserved. | Designed by
+      - strong [ref=e118]:
+        - link "END Prasad" [ref=e119] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/prasad-e-n-d/

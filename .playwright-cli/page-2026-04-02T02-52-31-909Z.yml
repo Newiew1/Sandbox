@@ -1,0 +1,229 @@
+- generic [ref=e3]:
+  - generic:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "cnarios logo" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "cnarios logo" [ref=e8]
+        - generic [ref=e9]:
+          - link "Features" [ref=e10] [cursor=pointer]:
+            - /url: /#features
+          - link "How it works?" [ref=e11] [cursor=pointer]:
+            - /url: /#how-it-works
+          - link "Contact Us" [ref=e12] [cursor=pointer]:
+            - /url: /#contact-us
+          - link "Blogs" [ref=e13] [cursor=pointer]:
+            - /url: /blogs
+    - navigation
+  - generic [ref=e14]:
+    - link "Back" [ref=e16] [cursor=pointer]:
+      - /url: /explore
+      - button "Back" [ref=e17]:
+        - img [ref=e19]
+        - text: Back
+    - banner [ref=e21]:
+      - heading "Automation Challenges" [level=1] [ref=e22]
+      - generic [ref=e23]: Test your automation skills with real-world scenarios and challenges
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - generic: Search challenges
+        - generic [ref=e27]:
+          - textbox "Search challenges" [ref=e28]
+          - group:
+            - generic: Search challenges
+      - generic [ref=e29]:
+        - generic [ref=e30]: Difficulty
+        - generic [ref=e31]:
+          - combobox [ref=e32] [cursor=pointer]: All Difficulties
+          - textbox: all
+          - img
+          - group:
+            - generic: Difficulty
+      - generic [ref=e33]:
+        - generic [ref=e34]: Category
+        - generic [ref=e35]:
+          - combobox [ref=e36] [cursor=pointer]: All Categories
+          - textbox: all
+          - img
+          - group:
+            - generic: Category
+    - generic [ref=e37]:
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - generic [ref=e41]:
+            - img [ref=e42]
+            - generic [ref=e44]: medium
+          - heading "E-commerce Product Listing & Pagination" [level=2] [ref=e45]
+          - paragraph [ref=e46]: Automate testing of an e-commerce product listing page with pagination, category grouping, and product details.
+          - generic [ref=e47]:
+            - generic [ref=e49]: pagination
+            - generic [ref=e51]: products
+            - generic [ref=e53]: search
+            - generic [ref=e55]: sorting
+            - generic [ref=e57]: filtering
+          - paragraph [ref=e59]: E-Commerce
+        - button "View Challenge" [ref=e61] [cursor=pointer]
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - generic [ref=e65]:
+            - img [ref=e66]
+            - generic [ref=e68]: medium
+          - heading "E-commerce Product Filtering & Search" [level=2] [ref=e69]
+          - paragraph [ref=e70]: Automate testing of an e-commerce product listing page with multiple filtering options, including category, price range, rating, and stock availability.
+          - generic [ref=e71]:
+            - generic [ref=e73]: filters
+            - generic [ref=e75]: products
+            - generic [ref=e77]: search
+            - generic [ref=e79]: category
+            - generic [ref=e81]: price
+            - generic [ref=e83]: rating
+            - generic [ref=e85]: stock
+          - paragraph [ref=e87]: E-Commerce
+        - button "View Challenge" [ref=e89] [cursor=pointer]
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - generic [ref=e93]:
+            - img [ref=e94]
+            - generic [ref=e96]: easy
+          - heading "Role-Based Login Flow" [level=2] [ref=e97]
+          - paragraph [ref=e98]: Automate testing of a role-based login system where users can log in with different credentials (e.g., Admin and User) and see distinct dashboards after login.
+          - generic [ref=e99]:
+            - generic [ref=e101]: login
+            - generic [ref=e103]: authentication
+            - generic [ref=e105]: roles
+            - generic [ref=e107]: validation
+            - generic [ref=e109]: form
+          - paragraph [ref=e111]: Authentication
+        - button "View Challenge" [ref=e113] [cursor=pointer]
+      - generic [ref=e114]:
+        - generic [ref=e115]:
+          - generic [ref=e117]:
+            - img [ref=e118]
+            - generic [ref=e121]: hard
+          - heading "E-commerce End-to-End Product Purchasing Flow" [level=2] [ref=e122]
+          - paragraph [ref=e123]: Automate testing of a complete e-commerce purchasing journey from product listing to checkout. This includes adding products to the cart, providing billing details, simulating payment, and verifying order success or failure.
+          - generic [ref=e124]:
+            - generic [ref=e126]: products
+            - generic [ref=e128]: cart
+            - generic [ref=e130]: checkout
+            - generic [ref=e132]: billing
+            - generic [ref=e134]: payment
+            - generic [ref=e136]: order
+          - paragraph [ref=e138]: E-Commerce
+        - button "View Challenge" [ref=e140] [cursor=pointer]
+      - generic [ref=e141]:
+        - generic [ref=e142]:
+          - generic [ref=e144]:
+            - img [ref=e145]
+            - generic [ref=e148]: expert
+          - heading "Social Media Feed Interaction Challenge" [level=2] [ref=e149]
+          - paragraph [ref=e150]: Automate testing of a social media feed that simulates real-world interactions. Testers must handle dynamically generated posts, toggle likes, verify notification states, and ensure UI updates correctly after user actions.
+          - generic [ref=e151]:
+            - generic [ref=e153]: dynamic-elements
+            - generic [ref=e155]: feed
+            - generic [ref=e157]: posts
+            - generic [ref=e159]: notifications
+            - generic [ref=e161]: likes
+            - generic [ref=e163]: UI
+          - paragraph [ref=e165]: Social Media
+        - button "View Challenge" [ref=e167] [cursor=pointer]
+      - generic [ref=e168]:
+        - generic [ref=e169]:
+          - generic [ref=e171]:
+            - img [ref=e172]
+            - generic [ref=e174]: medium
+          - heading "Shadow DOM Login Form Interaction Challenge" [level=2] [ref=e175]
+          - paragraph [ref=e176]: Automate testing of a login form rendered entirely inside a Shadow DOM. Testers must interact with username and password fields, validate login behavior, and handle Shadow DOM-specific locators.
+          - generic [ref=e177]:
+            - generic [ref=e179]: shadow-dom
+            - generic [ref=e181]: inputs
+            - generic [ref=e183]: buttons
+            - generic [ref=e185]: forms
+            - generic [ref=e187]: login
+            - generic [ref=e189]: automation
+          - paragraph [ref=e191]: Web Automation
+        - button "View Challenge" [ref=e193] [cursor=pointer]
+      - generic [ref=e194]:
+        - generic [ref=e195]:
+          - generic [ref=e197]:
+            - img [ref=e198]
+            - generic [ref=e200]: medium
+          - heading "Simple Search Engine UI Automation Challenge" [level=2] [ref=e201]
+          - paragraph [ref=e202]: Automate testing of a minimal search engine interface that mimics a Google-style experience. Testers must interact with the search bar, trigger queries, validate mock results, and handle input re-rendering that can lead to stale element exceptions in automation scripts.
+          - generic [ref=e203]:
+            - generic [ref=e205]: search
+            - generic [ref=e207]: inputs
+            - generic [ref=e209]: buttons
+            - generic [ref=e211]: stale-element
+            - generic [ref=e213]: automation
+            - generic [ref=e215]: react
+            - generic [ref=e217]: mui
+          - paragraph [ref=e219]: Search Bar
+        - button "View Challenge" [ref=e221] [cursor=pointer]
+      - generic [ref=e222]:
+        - generic [ref=e223]:
+          - generic [ref=e225]:
+            - img [ref=e226]
+            - generic [ref=e229]: expert
+          - heading "Job Application Form Automation Challenge" [level=2] [ref=e230]
+          - paragraph [ref=e231]: Automate end-to-end testing of a dynamic job application form. You must validate personal details, file uploads, skills input, multiple selections, sliders, date/time pickers, and form validation with error handling.
+          - generic [ref=e232]:
+            - generic [ref=e234]: forms
+            - generic [ref=e236]: inputs
+            - generic [ref=e238]: file-upload
+            - generic [ref=e240]: validation
+            - generic [ref=e242]: react
+            - generic [ref=e244]: mui
+            - generic [ref=e246]: automation
+          - paragraph [ref=e248]: Forms
+        - button "View Challenge" [ref=e250] [cursor=pointer]
+  - contentinfo [ref=e251]:
+    - separator [ref=e252]
+    - generic [ref=e253]:
+      - link "cnarios logo" [ref=e255] [cursor=pointer]:
+        - /url: /
+        - img "cnarios logo" [ref=e256]
+      - generic [ref=e257]:
+        - generic [ref=e258]:
+          - heading "Concepts" [level=6] [ref=e259]
+          - generic [ref=e260]:
+            - link "Iframes" [ref=e261] [cursor=pointer]:
+              - /url: /concepts/iframe
+            - link "Multi Window" [ref=e262] [cursor=pointer]:
+              - /url: /concepts/multiwindow
+            - link "Links" [ref=e263] [cursor=pointer]:
+              - /url: /concepts/links
+            - link "Table" [ref=e264] [cursor=pointer]:
+              - /url: /concepts/table
+        - generic [ref=e265]:
+          - heading "Challenges" [level=6] [ref=e266]
+          - generic [ref=e267]:
+            - link "E-commerce Pagination" [ref=e268] [cursor=pointer]:
+              - /url: /challenges/product-listing-pagination
+            - link "E-commerce Filters" [ref=e269] [cursor=pointer]:
+              - /url: /challenges/product-filtering
+        - generic [ref=e270]:
+          - heading "Blogs" [level=6] [ref=e271]
+          - generic [ref=e272]:
+            - link "HTML Basics" [ref=e273] [cursor=pointer]:
+              - /url: /blogs/html-basics
+            - link "Locator Strategies" [ref=e274] [cursor=pointer]:
+              - /url: /blogs/Locators
+      - generic [ref=e276]:
+        - link "LinkedIn" [ref=e277] [cursor=pointer]:
+          - /url: https://www.linkedin.com/company/cnarios
+          - img [ref=e278]
+          - text: LinkedIn
+        - link "YouTube" [ref=e280] [cursor=pointer]:
+          - /url: https://www.youtube.com/channel/UC2F8fdGwKP18tyqEKtGRxeg
+          - img [ref=e281]
+          - text: YouTube
+        - link "Email" [ref=e283] [cursor=pointer]:
+          - /url: mailto:cnaarios.@gmail.com
+          - img [ref=e284]
+          - text: Email
+    - paragraph [ref=e288]:
+      - text: © 2026 Cnarios. All rights reserved. | Designed by
+      - strong [ref=e289]:
+        - link "END Prasad" [ref=e290] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/prasad-e-n-d/
