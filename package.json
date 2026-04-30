@@ -1,4 +1,28 @@
 {
+  "name": "cnarios-test-suite",
+  "version": "1.0.0",
+  "description": "Comprehensive E2E test suite for Cnarios using Playwright and Page Object Model",
+  "scripts": {
+    "test": "playwright test",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "test:headed": "playwright test --headed",
+    "test:single": "playwright test",
+    "test:grep": "playwright test --grep",
+    "test:home": "playwright test tests/home.spec.ts",
+    "test:explore": "playwright test tests/explore.spec.ts",
+    "test:interview": "playwright test tests/interviewQuestions.spec.ts",
+    "test:concepts": "playwright test tests/concepts.spec.ts",
+    "test:challenges": "playwright test tests/challenges.spec.ts",
+    "test:blogs": "playwright test tests/blogs.spec.ts",
+    "test:e2e": "playwright test tests/e2e.spec.ts",
+    "test:all": "playwright test && playwright show-report",
+    "test:chrome": "playwright test --project=chromium",
+    "test:edge": "playwright test --project=\"Microsoft Edge\"",
+    "test:both": "playwright test --project=chromium --project=\"Microsoft Edge\"",
+    "clean": "rm -rf playwright-report test-results .playwright"
+  },
   "devDependencies": {
     "@playwright/test": "^1.59.0",
     "@types/node": "^25.5.0"
