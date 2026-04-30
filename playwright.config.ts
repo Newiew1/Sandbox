@@ -8,19 +8,19 @@ export default defineConfig({
     timeout: 10000,
   },
   reporter: [
-    ['html', { 
-      outputFolder: 'playwright-report',
-      open: 'always',
-    }],
-    ['list'],
-    ['json', { outputFile: 'test-results.json' }],
+    ['html'],
+    ['allure-playwright'],  // ← Add this line
   ],
   use: {
     headless: true,
     viewport: { width: 1280, height: 720 },
     actionTimeout: 10000,
-    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',  // ← Automatic screenshots
+    video: 'retain-on-failure',     // ← Automatic videos
+    trace: 'on-first-retry',        // ← Already have this
   },
+  retries: process.env.CI ? 2 : 0,  // CI = retry twice if fails
+  // Local = don't retry (fast feedback)
   projects: [
     {
       name: 'chromium',

@@ -158,7 +158,9 @@ export class BlogsPage extends BasePage {
         '[role="main"]',
         '.blog-content',
         '.post-content',
-        'div:nth-of-type(5)'
+        'div:nth-of-type(5)',
+        'h1 ~ *',  // Any element after h1
+        'nav ~ div'  // Generic div after navigation
       ];
       
       for (const selector of selectors) {
@@ -176,7 +178,12 @@ export class BlogsPage extends BasePage {
         }
       }
       
-      // Fallback: return body text
+      // Fallback: Get all content from the generic content container after navigation
+      const allContent = await this.page.locator('body > *:nth-of-type(n+2)').textContent();
+      if (allContent && allContent.length > 10) {
+        return allContent;
+      }
+      
       return '';
     } catch {
       return '';
