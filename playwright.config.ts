@@ -1,12 +1,20 @@
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './',
-  workers: process.env.CI ? 2 : undefined,
+  testDir: './tests',
+  workers: process.env.CI ? 5 : undefined,
   timeout: 30000,
   expect: {
     timeout: 10000,
   },
+  reporter: [
+    ['html', { 
+      outputFolder: 'playwright-report',
+      open: 'always',
+    }],
+    ['list'],
+    ['json', { outputFile: 'test-results.json' }],
+  ],
   use: {
     headless: true,
     viewport: { width: 1280, height: 720 },
@@ -17,6 +25,10 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { browserName: 'chromium' },
+    },
+    {
+      name: 'Microsoft Edge',
+      use: { browserName: 'chromium', channel: 'msedge' },
     },
   ],
 });
