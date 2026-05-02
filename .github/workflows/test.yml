@@ -1,0 +1,291 @@
+name: Playwright Test Suite
+
+# TRIGGER CONDITIONS: When does this workflow run?
+on:
+  # Run on every push to any branch
+  push:
+    branches:
+      - main
+      - develop
+      - changes
+      - 'feature/**'
+  
+  # Run on every pull request to main
+  pull_request:
+    branches:
+      - main
+  
+  # Run tests on schedule (every night at 2 AM UTC)
+  schedule:
+    - cron: '0 2 * * *'
+  
+  # Allow manual trigger from GitHub UI
+  workflow_dispatch:
+
+# CONCURRENCY: Cancel previous runs when new code is pushed
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ========================================================================
+  # JOB 1: Run Tests in Parallel on Multiple Browsers
+  # ========================================================================
+  test:
+    name: 'Test Suite: ${{ matrix.browser }}'
+    
+    # Run on GitHub's Ubuntu runner
+    runs-on: ubuntu-latest
+    
+    # Create matrix for multiple browser testing
+    strategy:
+      # Don't stop other browsers if one fails
+      fail-fast: false
+      
+      matrix:
+        # Test on both Chromium and Edge
+        browser: [chromium, 'Microsoft Edge']
+        # Test on different Node versions
+        node-version: [18.x, 20.x]
+    
+    # Step-by-step test execution
+    steps:
+      # ====================================================================
+      # STEP 1: Checkout code from repository
+      # ====================================================================
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better reporting
+      
+      # ====================================================================
+      # STEP 2: Setup Node.js environment
+      # ====================================================================
+      - name: 🔧 Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'  # Cache npm dependencies for faster builds
+      
+      # ====================================================================
+      # STEP 3: Install project dependencies
+      # ====================================================================
+      - name: 📦 Install dependencies
+        run: npm ci
+        # npm ci (clean install) is preferred over npm install in CI
+        # - Installs exact versions from package-lock.json
+        # - Fails if lock file is out of sync
+        # - Faster and more reliable in CI environments
+      
+      # ====================================================================
+      # STEP 4: Install Playwright browsers
+      # ====================================================================
+      - name: 🌐 Install Playwright browsers
+        run: npx playwright install --with-deps
+        # --with-deps: Also installs browser dependencies (fonts, libraries)
+        # This is required for headless execution in Linux
+      
+      # ====================================================================
+      # STEP 5: Run Playwright tests
+      # ====================================================================
+      - name: 🧪 Run Playwright tests (${{ matrix.browser }})
+        run: npm test -- --project=${{ matrix.browser }}
+        # Runs tests using the specific browser from the matrix
+        # Sets CI=true automatically (GitHub Actions environment)
+        # CI=true triggers:
+        #   - 5 parallel workers (from playwright.config.ts)
+        #   - 2 retries on failure
+        #   - Parallel execution for speed
+        env:
+          CI: true
+          BASE_URL: ${{ secrets.BASE_URL || 'https://www.cnarios.com' }}
+          # Allow overriding BASE_URL via GitHub secrets
+          # Falls back to production URL if not set
+      
+      # ====================================================================
+      # STEP 6: Upload test results as artifacts
+      # ====================================================================
+      - name: 📤 Upload test results
+        if: always()  # Run even if tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.browser }}-node-${{ matrix.node-version }}
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 30
+          # Keeps artifacts for 30 days (default is 90)
+      
+      # ====================================================================
+      # STEP 7: Upload Allure test reports
+      # ====================================================================
+      - name: 📊 Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-${{ matrix.browser }}-node-${{ matrix.node-version }}
+          path: allure-results/
+          retention-days: 30
+      
+      # ====================================================================
+      # STEP 8: Upload screenshots and videos from failed tests
+      # ====================================================================
+      - name: 📸 Upload failure artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: failure-artifacts-${{ matrix.browser }}-node-${{ matrix.node-version }}
+          path: |
+            test-results/**/test-failed-*.png
+            test-results/**/video.webm
+          retention-days: 7
+          # Keep failure screenshots/videos for only 7 days to save storage
+
+  # ========================================================================
+  # JOB 2: Generate Allure Report (runs after test job completes)
+  # ========================================================================
+  allure-report:
+    name: 📊 Generate Allure Report
+    
+    # Only run if tests complete (success or failure)
+    if: always()
+    
+    needs: test  # Wait for 'test' job to complete
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      # ====================================================================
+      # STEP 1: Checkout code
+      # ====================================================================
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+      
+      # ====================================================================
+      # STEP 2: Download all Allure results from test job
+      # ====================================================================
+      - name: ⬇️ Download Allure results
+        uses: actions/download-artifact@v4
+        with:
+          # Download all artifacts named 'allure-results-*'
+          path: allure-reports
+          pattern: allure-results-*
+      
+      # ====================================================================
+      # STEP 3: Setup Java (required for Allure)
+      # ====================================================================
+      - name: ☕ Setup Java for Allure
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+      
+      # ====================================================================
+      # STEP 4: Generate Allure HTML report
+      # ====================================================================
+      - name: 🎨 Generate Allure HTML Report
+        run: |
+          npm install -D allure-commandline
+          # Flatten directory structure: move all results to single folder
+          mkdir -p allure-results
+          find allure-reports -name "*.json" -type f | xargs -I {} cp {} allure-results/
+          # Generate HTML report from collected results
+          npx allure generate allure-results -o allure-report --clean
+      
+      # ====================================================================
+      # STEP 5: Upload Allure report as artifact
+      # ====================================================================
+      - name: 📤 Upload Allure report
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report/
+          retention-days: 30
+      
+      # ====================================================================
+      # STEP 6: Publish Allure report to GitHub Pages
+      # ====================================================================
+      - name: 🚀 Deploy Allure Report to GitHub Pages
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: allure-report/
+          # Only deploy on push to main branch
+          # This publishes the report to GitHub Pages
+
+  # ========================================================================
+  # JOB 3: Publish to GitHub Pages
+  # ========================================================================
+  deploy-pages:
+    name: 🌐 Publish to GitHub Pages
+    
+    # Only run if main branch and test passes
+    if: github.ref == 'refs/heads/main' && success()
+    
+    needs: allure-report
+    
+    # Allow GitHub Pages deployment
+    permissions:
+      pages: write
+      id-token: write
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      # ====================================================================
+      # STEP 1: Deploy to GitHub Pages
+      # ====================================================================
+      - name: 📡 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        # Automatically deploys allure-report/ to GitHub Pages
+        # URL will be: https://owner.github.io/repo/
+
+  # ========================================================================
+  # JOB 4: Status Check (runs after all jobs)
+  # ========================================================================
+  status-check:
+    name: ✅ Test Status Check
+    
+    # Run after tests and reports
+    if: always()
+    
+    needs: [test, allure-report]
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      # ====================================================================
+      # STEP 1: Check if any job failed
+      # ====================================================================
+      - name: 📋 Check Test Results
+        run: |
+          if [[ "${{ needs.test.result }}" == "failure" ]]; then
+            echo "❌ Tests failed!"
+            exit 1
+          fi
+          echo "✅ All tests passed!"
+      
+      # ====================================================================
+      # STEP 2: Post summary to GitHub Actions
+      # ====================================================================
+      - name: 📝 Post Summary
+        if: always()
+        run: |
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          # 🧪 Test Execution Summary
+          
+          - **Test Job Status**: ${{ needs.test.result }}
+          - **Report Job Status**: ${{ needs.allure-report.result }}
+          - **Branch**: ${{ github.ref }}
+          - **Commit**: ${{ github.sha }}
+          
+          ## 📊 Reports
+          - [Allure Report](https://Newiew1.github.io/Sandbox) (deployed to GitHub Pages)
+          - Check **Artifacts** tab for detailed test results
+          
+          EOF
