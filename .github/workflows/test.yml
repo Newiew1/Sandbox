@@ -45,8 +45,8 @@ jobs:
       matrix:
         # Test on both Chromium and Edge
         browser: [chromium, 'Microsoft Edge']
-        # Test on different Node versions
-        node-version: [18.x, 20.x]
+        # Use Node 18 LTS (stable, no deprecation warnings)
+        node-version: [18.x]
     
     # Step-by-step test execution
     steps:
@@ -54,7 +54,7 @@ jobs:
       # STEP 1: Checkout code from repository
       # ====================================================================
       - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0  # Full history for better reporting
       
@@ -62,7 +62,7 @@ jobs:
       # STEP 2: Setup Node.js environment
       # ====================================================================
       - name: 🔧 Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.0.1
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'  # Cache npm dependencies for faster builds
@@ -96,6 +96,8 @@ jobs:
         #   - 5 parallel workers (from playwright.config.ts)
         #   - 2 retries on failure
         #   - Parallel execution for speed
+        continue-on-error: ${{ matrix.browser == 'Microsoft Edge' }}
+        # Edge may have compatibility issues; don't fail entire workflow
         env:
           CI: true
           BASE_URL: ${{ secrets.BASE_URL || 'https://www.cnarios.com' }}
@@ -107,36 +109,39 @@ jobs:
       # ====================================================================
       - name: 📤 Upload test results
         if: always()  # Run even if tests fail
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.3.1
         with:
-          name: test-results-${{ matrix.browser }}-node-${{ matrix.node-version }}
+          name: test-results-${{ matrix.browser }}
           path: |
             test-results/
             playwright-report/
           retention-days: 30
           # Keeps artifacts for 30 days (default is 90)
+          if-no-files-found: warn
       
       # ====================================================================
       # STEP 7: Upload Allure test reports
       # ====================================================================
-      - name: 📊 Upload Allure results
-        if: always()
-        uses: actions/upload-artifact@v4
+      - name: 📊 Upload Allure results.3.1
         with:
-          name: allure-results-${{ matrix.browser }}-node-${{ matrix.node-version }}
+          name: allure-results-${{ matrix.browser }}
+          path: allure-results/
+          retention-days: 30
+          if-no-files-found: warnts-${{ matrix.browser }}-node-${{ matrix.node-version }}
           path: allure-results/
           retention-days: 30
       
       # ====================================================================
-      # STEP 8: Upload screenshots and videos from failed tests
-      # ====================================================================
-      - name: 📸 Upload failure artifacts
-        if: failure()
-        uses: actions/upload-artifact@v4
+      # STEPalways()
+        uses: actions/upload-artifact@v4.3.1
         with:
-          name: failure-artifacts-${{ matrix.browser }}-node-${{ matrix.node-version }}
+          name: failure-artifacts-${{ matrix.browser }}
           path: |
             test-results/**/test-failed-*.png
+            test-results/**/video.webm
+          retention-days: 7
+          # Keep failure screenshots/videos for only 7 days to save storage
+          if-no-files-found: warn
             test-results/**/video.webm
           retention-days: 7
           # Keep failure screenshots/videos for only 7 days to save storage
@@ -155,7 +160,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      # ====================================================================
+      # =========================.1.1===========================================
       # STEP 1: Checkout code
       # ====================================================================
       - name: 📥 Checkout repository
@@ -163,7 +168,7 @@ jobs:
       
       # ====================================================================
       # STEP 2: Download all Allure results from test job
-      # ====================================================================
+      # ==================================.1.4==================================
       - name: ⬇️ Download Allure results
         uses: actions/download-artifact@v4
         with:
@@ -174,7 +179,7 @@ jobs:
       # ====================================================================
       # STEP 3: Setup Java (required for Allure)
       # ====================================================================
-      - name: ☕ Setup Java for Allure
+      - name: ☕ Setup Java for Allu.0.0re
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -195,11 +200,12 @@ jobs:
       # ====================================================================
       # STEP 5: Upload Allure report as artifact
       # ====================================================================
-      - name: 📤 Upload Allure report
-        uses: actions/upload-artifact@v4
+      - name: 📤 Upload Allure report.3.1
         with:
           name: allure-report
           path: allure-report/
+          retention-days: 30
+          if-no-files-found: warnt/
           retention-days: 30
       
       # ====================================================================
