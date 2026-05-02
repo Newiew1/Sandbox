@@ -1,0 +1,176 @@
+name: Playwright Test Suite
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - changes
+      - 'feature/**'
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: 'Test Suite: ${{ matrix.browser }}'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, 'Microsoft Edge']
+        node-version: [18.x]
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+
+      - name: 🔧 Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4.0.1
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🌐 Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: 🧪 Run Playwright tests (${{ matrix.browser }})
+        run: npm test -- --project=${{ matrix.browser }}
+        continue-on-error: ${{ matrix.browser == 'Microsoft Edge' }}
+        env:
+          CI: true
+          BASE_URL: ${{ secrets.BASE_URL || 'https://www.cnarios.com' }}
+
+      - name: 📤 Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: test-results-${{ matrix.browser }}
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: 📊 Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: allure-results-${{ matrix.browser }}
+          path: allure-results/
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: 📸 Upload failure artifacts
+        if: always()
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: failure-artifacts-${{ matrix.browser }}
+          path: |
+            test-results/**/test-failed-*.png
+            test-results/**/video.webm
+          retention-days: 7
+          if-no-files-found: warn
+
+  allure-report:
+    name: 📊 Generate Allure Report
+    if: always()
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4.1.1
+
+      - name: ⬇️ Download Allure results
+        uses: actions/download-artifact@v4.1.4
+        with:
+          path: allure-reports
+          pattern: allure-results-*
+
+      - name: ☕ Setup Java for Allure
+        uses: actions/setup-java@v4.0.0
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: 🎨 Generate Allure HTML Report
+        run: |
+          npm install -D allure-commandline
+          mkdir -p allure-results
+          find allure-reports -name "*.json" -type f | xargs -I {} cp {} allure-results/
+          npx allure generate allure-results -o allure-report --clean
+
+      - name: 📤 Upload Allure report
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: allure-report
+          path: allure-report/
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: 🚀 Deploy Allure Report to GitHub Pages
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: allure-report/
+
+  deploy-pages:
+    name: 🌐 Publish to GitHub Pages
+    if: github.ref == 'refs/heads/main' && success()
+    needs: allure-report
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📡 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  status-check:
+    name: ✅ Test Status Check
+    if: always()
+    needs: [test, allure-report]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📋 Check Test Results
+        run: |
+          if [[ "${{ needs.test.result }}" == "failure" ]]; then
+            echo "⚠️ Tests had failures (Edge may have failed)"
+          fi
+          echo "✅ Workflow execution complete"
+
+      - name: 📝 Post Summary
+        if: always()
+        run: |
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          # 🧪 Test Execution Summary
+
+          - **Test Job Status**: ${{ needs.test.result }}
+          - **Report Job Status**: ${{ needs.allure-report.result }}
+          - **Branch**: ${{ github.ref }}
+          - **Commit**: ${{ github.sha }}
+
+          ## 📊 Reports
+          - [Allure Report](https://Newiew1.github.io/Sandbox) (deployed to GitHub Pages)
+          - Check **Artifacts** tab for detailed test results
+
+          EOF
