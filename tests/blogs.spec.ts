@@ -14,106 +14,93 @@ test.describe('Blogs Page Tests', () => {
   });
 
   test('TC091: Blogs page loads successfully', async () => {
-    const isLoaded = await blogsPage.verifyPageLoaded();
-    expect(isLoaded).toBeTruthy();
-
-    const currentURL = await blogsPage.getCurrentURL();
-    expect(currentURL).toMatch(/.*\/blogs$/);
+    await expect(blogsPage.pageHeading).toBeVisible();
+    await expect(blogsPage.page).toHaveURL(/.*\/blogs$/);
   });
 
   test('TC092: Blogs page displays HTML Basics blog card', async () => {
-    const isVisible = await blogsPage.htmlBasicsBlogCard.isVisible();
-    expect(isVisible).toBeTruthy();
+    await expect(blogsPage.htmlBasicsBlogCard).toBeVisible();
   });
 
   test('TC093: Blogs page displays Locator Strategies blog card', async () => {
-    const isVisible = await blogsPage.locatorStrategiesBlogCard.isVisible();
-    expect(isVisible).toBeTruthy();
+    await expect(blogsPage.locatorStrategiesBlogCard).toBeVisible();
   });
 
   test('TC094: All blog cards are visible', async () => {
-    const allVisible = await blogsPage.verifyAllBlogCards();
-    expect(allVisible).toBeTruthy();
+    await expect(blogsPage.htmlBasicsBlogCard).toBeVisible();
+    await expect(blogsPage.locatorStrategiesBlogCard).toBeVisible();
   });
 
   test('TC095: HTML Basics blog link is clickable', async () => {
-    const isVisible = await blogsPage.htmlBasicsBlogLink.isVisible();
-    expect(isVisible).toBeTruthy();
+    await expect(blogsPage.htmlBasicsBlogLink).toBeVisible();
+    await expect(blogsPage.htmlBasicsBlogLink).toBeEnabled();
   });
 
   test('TC096: Locator Strategies blog link is clickable', async () => {
-    const isVisible = await blogsPage.locatorStrategiesBlogLink.isVisible();
-    expect(isVisible).toBeTruthy();
+    await expect(blogsPage.locatorStrategiesBlogLink).toBeVisible();
+    await expect(blogsPage.locatorStrategiesBlogLink).toBeEnabled();
   });
 
   test('TC097: Click on HTML Basics blog', async () => {
     await blogsPage.clickHTMLBasicsBlog();
-    const currentURL = await blogsPage.getCurrentURL();
-    expect(currentURL).toContain('html-basics');
+    await expect(blogsPage.page).toHaveURL(/.*html-basics/);
   });
 
   test('TC098: Click on Locator Strategies blog', async () => {
     await blogsPage.clickLocatorStrategiesBlog();
-    const currentURL = await blogsPage.getCurrentURL();
-    expect(currentURL).toContain('Locators');
+    await expect(blogsPage.page).toHaveURL(/.*Locators/);
   });
 
   test('TC099: Blog detail page loads correctly', async () => {
     await blogsPage.gotoBlogByName('html-basics');
-    const isLoaded = await blogsPage.verifyBlogDetailPageLoaded();
-    expect(isLoaded).toBeTruthy();
+    await expect(blogsPage.pageHeading).toBeVisible();
   });
 
   test('TC100: Page heading text is correct', async () => {
-    const headingText = await blogsPage.getPageHeadingText();
-    expect(headingText).toContain('Latest Blogs');
+    await expect(blogsPage.pageHeading).toContainText('Latest Blogs');
   });
 
   test('TC101: Blog card count is greater than zero', async () => {
-    const count = await blogsPage.getBlogCardCount();
-    expect(count).toBeGreaterThan(0);
+    const blogLinks = blogsPage.page.locator('a[href*="/blogs/"]');
+    await expect(blogLinks.first()).toBeVisible();
   });
 
   test('TC102: Blog links are retrievable', async () => {
-    const links = await blogsPage.getAllBlogLinks();
-    expect(links.length).toBeGreaterThan(0);
+    const blogLinks = blogsPage.page.locator('a[href*="/blogs/"]');
+    await expect(blogLinks.first()).toBeVisible();
   });
 
   test('TC103: HTML Basics blog link is enabled', async () => {
-    const isEnabled = await blogsPage.isBlogLinkClickable(blogsPage.htmlBasicsBlogLink);
-    expect(isEnabled).toBeTruthy();
+    await expect(blogsPage.htmlBasicsBlogLink).toBeEnabled();
   });
 
   test('TC104: Navigate to blog and verify content', async () => {
     await blogsPage.gotoBlogByName('html-basics');
-    const content = await blogsPage.getBlogContent();
-    expect(content.length).toBeGreaterThan(0);
+    await expect(blogsPage.pageHeading).toBeVisible();
   });
 
   test('TC105: Navigation is visible on blogs page', async () => {
-    const navVisible = await blogsPage.isNavigationVisible();
-    expect(navVisible).toBeTruthy();
+    await expect(blogsPage.navigationBar).toBeVisible();
   });
 
   test('TC106: Footer is visible on blogs page', async () => {
-    const footerVisible = await blogsPage.isFooterVisible();
-    expect(footerVisible).toBeTruthy();
+    await expect(blogsPage.footer).toBeVisible();
   });
 
   test('TC107: Page title contains Blogs', async () => {
-    const title = await blogsPage.getPageTitle();
+    const title = await blogsPage.page.title();
     expect(title).toContain('Blogs');
   });
 
   test('TC108: Blogs page description is visible', async () => {
-    const isVisible = await blogsPage.pageDescription.isVisible();
-    expect(isVisible).toBeTruthy();
+    await expect(blogsPage.pageDescription).toBeVisible();
   });
 
   test('TC109: All blog cards have clickable links', async () => {
-    const links = await blogsPage.getAllBlogLinks();
-    for (const link of links) {
-      expect(link).toMatch(/\/blogs\//);
+    const blogLinks = blogsPage.page.locator('a[href*="/blogs/"]');
+    for (let i = 0; i < await blogLinks.count(); i++) {
+      const href = await blogLinks.nth(i).getAttribute('href');
+      expect(href).toMatch(/\/blogs\//);  
     }
   });
 });

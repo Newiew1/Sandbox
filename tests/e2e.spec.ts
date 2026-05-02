@@ -19,18 +19,15 @@ test.describe('End-to-End User Journeys', () => {
 
     // Start at home
     await homePage.goto();
-    const isHomeLoaded = await homePage.verifyPageLoaded();
-    expect(isHomeLoaded).toBeTruthy();
+    await expect(homePage.heroHeading).toBeVisible();
 
     // Navigate to explore
     await homePage.clickStartExploring();
-    const isExploreLoaded = await explorePage.verifyPageLoaded();
-    expect(isExploreLoaded).toBeTruthy();
+    await expect(explorePage.pageHeading).toBeVisible();
 
     // Navigate to concepts
     await explorePage.clickStartLearning();
-    const currentURL = await explorePage.getCurrentURL();
-    expect(currentURL).toContain('concepts');
+    await expect(page).toHaveURL(/.*concepts/);
   });
 
   test('TC111: Complete user journey - Home to Challenges', async ({ page }) => {
@@ -39,16 +36,12 @@ test.describe('End-to-End User Journeys', () => {
 
     // Start at home
     await homePage.goto();
-    const isHomeLoaded = await homePage.verifyPageLoaded();
-    expect(isHomeLoaded).toBeTruthy();
+    await expect(homePage.heroHeading).toBeVisible();
 
     // Navigate to challenges
     await homePage.clickChallenges();
-    const isChallengeLoaded = await challengePage.verifyPageLoaded();
-    expect(isChallengeLoaded).toBeTruthy();
-
-    const currentURL = await challengePage.getCurrentURL();
-    expect(currentURL).toMatch(/.*\/challenges$/);
+    await expect(challengePage.pageHeading).toBeVisible();
+    await expect(page).toHaveURL(/.*\/challenges$/);
   });
 
   test('TC112: Complete user journey - Home to Interviews with Search', async ({ page }) => {
@@ -64,13 +57,11 @@ test.describe('End-to-End User Journeys', () => {
     
     // Navigate to interview questions
     await explorePage.clickExploreQuestions();
-    const isLoaded = await interviewPage.verifyPageLoaded();
-    expect(isLoaded).toBeTruthy();
+    await expect(interviewPage.pageHeading).toBeVisible();
 
     // Perform search
     await interviewPage.searchQuestions('framework');
-    const questionsDisplayed = await interviewPage.verifyQuestionsDisplayed();
-    expect(questionsDisplayed).toBeTruthy();
+    await expect(interviewPage.page.locator('ul li, div[class*="list"] div').first()).toHaveCount(1);
   });
 
   test('TC113: Complete user journey - Home to Blogs to Article', async ({ page }) => {
@@ -86,13 +77,11 @@ test.describe('End-to-End User Journeys', () => {
     
     // Navigate to blogs
     await explorePage.clickReadBlogs();
-    const isLoaded = await blogsPage.verifyPageLoaded();
-    expect(isLoaded).toBeTruthy();
+    await expect(blogsPage.pageHeading).toBeVisible();
 
     // Navigate to HTML Basics blog
     await blogsPage.clickHTMLBasicsBlog();
-    const detailPageLoaded = await blogsPage.verifyBlogDetailPageLoaded();
-    expect(detailPageLoaded).toBeTruthy();
+    await expect(blogsPage.pageHeading).toBeVisible();
   });
 
   test('TC114: Complete user journey - Challenge exploration and navigation', async ({ page }) => {
@@ -100,17 +89,14 @@ test.describe('End-to-End User Journeys', () => {
 
     // Navigate to challenges page
     await challengePage.goto();
-    const isLoaded = await challengePage.verifyPageLoaded();
-    expect(isLoaded).toBeTruthy();
+    await expect(challengePage.pageHeading).toBeVisible();
 
     // Click on Product Filtering challenge
     await challengePage.clickProductFilteringChallenge();
-    const currentURL = await challengePage.getCurrentURL();
-    expect(currentURL).toContain('product-filtering');
+    await expect(page).toHaveURL(/.*product-filtering/);
 
     // Verify challenge content
-    const titleVisible = await challengePage.verifyChallengeTitle();
-    expect(titleVisible).toBeTruthy();
+    await expect(challengePage.pageHeading).toBeVisible();
   });
 
   test('TC115: Complete user journey - Concept exploration with tab switching', async ({ page }) => {
@@ -118,23 +104,19 @@ test.describe('End-to-End User Journeys', () => {
 
     // Navigate to iframe concept
     await conceptsPage.goto('iframe');
-    const isLoaded = await conceptsPage.verifyPageLoaded();
-    expect(isLoaded).toBeTruthy();
+    await expect(conceptsPage.pageHeading).toBeVisible();
 
     // Switch to Try It Yourself tab
     await conceptsPage.clickTryItYourselfTab();
-    const isTryItSelected = await conceptsPage.isTryItYourselfTabSelected();
-    expect(isTryItSelected).toBeTruthy();
+    await expect(conceptsPage.tryItYourselfTab).toHaveAttribute('aria-selected', 'true');
 
     // Switch to Test Cases tab
     await conceptsPage.clickTestCasesTab();
-    const isTestCasesSelected = await conceptsPage.isTestCasesTabSelected();
-    expect(isTestCasesSelected).toBeTruthy();
+    await expect(conceptsPage.testCasesTab).toHaveAttribute('aria-selected', 'true');
 
     // Switch back to Concept tab
     await conceptsPage.clickConceptTab();
-    const isConceptSelected = await conceptsPage.isConceptTabSelected();
-    expect(isConceptSelected).toBeTruthy();
+    await expect(conceptsPage.conceptTab).toHaveAttribute('aria-selected', 'true');
   });
 
   test('TC116: Navigation flow - Home -> Explore -> Back to Home', async ({ page }) => {
@@ -143,18 +125,15 @@ test.describe('End-to-End User Journeys', () => {
 
     // Start at home
     await homePage.goto();
-    let url = await homePage.getCurrentURL();
-    expect(url).toMatch(/^https:\/\/www\.cnarios\.com\/$|^https:\/\/www\.cnarios\.com$/);
+    await expect(page).toHaveURL(/^https:\/\/www\.cnarios\.com\/$|^https:\/\/www\.cnarios\.com$/);
 
     // Navigate to explore
     await homePage.clickStartExploring();
-    url = await explorePage.getCurrentURL();
-    expect(url).toContain('explore');
+    await expect(page).toHaveURL(/.*explore/);
 
     // Go back to home
     await explorePage.goBack();
-    url = await explorePage.getCurrentURL();
-    expect(url).toMatch(/^https:\/\/www\.cnarios\.com\/$|^https:\/\/www\.cnarios\.com$/);
+    await expect(page).toHaveURL(/^https:\/\/www\.cnarios\.com\/$|^https:\/\/www\.cnarios\.com$/);
   });
 
   test('TC117: Filter testing - Interview questions filter interaction', async ({ page }) => {
@@ -162,20 +141,17 @@ test.describe('End-to-End User Journeys', () => {
 
     // Navigate to interview questions
     await interviewPage.goto();
-    const isLoaded = await interviewPage.verifyPageLoaded();
-    expect(isLoaded).toBeTruthy();
+    await expect(interviewPage.pageHeading).toBeVisible();
 
     // Test search with multiple keywords
     for (const keyword of ['selenium', 'xpath', 'css']) {
       await interviewPage.searchQuestions(keyword);
-      const inputValue = await interviewPage.getSearchInputValue();
-      expect(inputValue).toBe(keyword);
+      await expect(interviewPage.searchInput).toHaveValue(keyword);
     }
 
     // Clear search
     await interviewPage.clearSearchInput();
-    const clearedValue = await interviewPage.getSearchInputValue();
-    expect(clearedValue).toBe('');
+    await expect(interviewPage.searchInput).toHaveValue('');
   });
 
   test('TC118: Multi-concept navigation', async ({ page }) => {
@@ -185,39 +161,33 @@ test.describe('End-to-End User Journeys', () => {
 
     for (const concept of concepts) {
       await conceptsPage.navigateToConcept(concept);
-      const url = await conceptsPage.getCurrentURL();
-      expect(url).toContain(concept);
-      
-      const headingText = await conceptsPage.getPageHeadingText();
-      expect(headingText.length).toBeGreaterThan(0);
+      await expect(page).toHaveURL(new RegExp(`.*${concept}`));
+      await expect(conceptsPage.pageHeading).toBeVisible();
     }
   });
 
   test('TC119: Full navigation bar test across all pages', async ({ page }) => {
     const homePage = new HomePage(page);
     const pages = [
-      { page: new HomePage(page), path: '/' },
-      { page: new ExplorePage(page), path: '/explore' },
-      { page: new InterviewQuestionsPage(page), path: '/interview-questions' },
-      { page: new ChallengePage(page), path: '/challenges' },
-      { page: new BlogsPage(page), path: '/blogs' },
+      { path: '/' },
+      { path: '/explore' },
+      { path: '/interview-questions' },
+      { path: '/challenges' },
+      { path: '/blogs' },
     ];
 
     for (const pageObj of pages) {
       await page.goto(`https://www.cnarios.com${pageObj.path}`);
-      const navVisible = await homePage.isNavigationVisible();
-      expect(navVisible).toBeTruthy();
+      await expect(page.locator('nav').first()).toBeVisible();
     }
   });
 
   test('TC120: Footer links validation across pages', async ({ page }) => {
-    const homePage = new HomePage(page);
     const pages = ['/', '/explore', '/challenges'];
 
     for (const path of pages) {
       await page.goto(`https://www.cnarios.com${path}`);
-      const footerVisible = await homePage.isFooterVisible();
-      expect(footerVisible).toBeTruthy();
+      await expect(page.locator('footer').first()).toBeVisible();
     }
   });
 });

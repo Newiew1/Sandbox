@@ -1,0 +1,269 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: concepts.spec.ts >> Concepts Page Tests >> TC068: Usecases section is visible
+- Location: tests\concepts.spec.ts:94:7
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: locator('[data-section="usecases"]')
+Expected: visible
+Timeout: 10000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" with timeout 10000ms
+  - waiting for locator('[data-section="usecases"]')
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - generic:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "cnarios logo" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "cnarios logo" [ref=e8]
+        - generic [ref=e9]:
+          - link "Features" [ref=e10] [cursor=pointer]:
+            - /url: /#features
+          - link "How it works?" [ref=e11] [cursor=pointer]:
+            - /url: /#how-it-works
+          - link "Contact Us" [ref=e12] [cursor=pointer]:
+            - /url: /#contact-us
+          - link "Blogs" [ref=e13] [cursor=pointer]:
+            - /url: /blogs
+    - navigation
+  - generic [ref=e15]:
+    - navigation "breadcrumb" [ref=e16]:
+      - list [ref=e17]:
+        - listitem [ref=e18]:
+          - link "concepts" [ref=e19] [cursor=pointer]:
+            - /url: /concepts
+        - listitem [ref=e20]: ">"
+        - listitem [ref=e21]:
+          - paragraph [ref=e22]: iframe
+    - generic [ref=e23]:
+      - tablist [ref=e27]:
+        - tab "Concept" [selected] [ref=e28] [cursor=pointer]
+        - tab "Try It Yourself" [ref=e29] [cursor=pointer]
+        - tab "Test Cases" [ref=e30] [cursor=pointer]
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - heading "Iframe" [level=1] [ref=e35]
+          - heading "Overview" [level=3] [ref=e36]
+          - paragraph [ref=e38]: The <iframe> element embeds another HTML page within the current document.
+        - generic [ref=e39]:
+          - heading [level=3]
+          - alert [ref=e41]:
+            - img [ref=e43]
+            - generic [ref=e45]:
+              - generic [ref=e46]: Important Notes
+              - list [ref=e47]:
+                - listitem [ref=e48]: iFrames are HTML documents embedded within another page and need to be switched into before interacting.
+                - listitem [ref=e49]: Use switchTo().frame() or equivalent to access elements inside the iFrame.
+                - listitem [ref=e50]: Always switch back to the main document after interacting using switchTo().defaultContent().
+                - listitem [ref=e51]: Check if the iFrame is visible and fully loaded before performing actions.
+        - generic [ref=e52]:
+          - heading "Usecases" [level=3] [ref=e53]
+          - list [ref=e55]:
+            - listitem [ref=e56]:
+              - generic [ref=e58]: Embedding external content
+            - listitem [ref=e59]:
+              - generic [ref=e61]: Sandboxed environments for forms or ads
+  - contentinfo [ref=e62]:
+    - separator [ref=e63]
+    - generic [ref=e64]:
+      - link "cnarios logo" [ref=e66] [cursor=pointer]:
+        - /url: /
+        - img "cnarios logo" [ref=e67]
+      - generic [ref=e68]:
+        - generic [ref=e69]:
+          - heading "Concepts" [level=6] [ref=e70]
+          - generic [ref=e71]:
+            - link "Iframes" [ref=e72] [cursor=pointer]:
+              - /url: /concepts/iframe
+            - link "Multi Window" [ref=e73] [cursor=pointer]:
+              - /url: /concepts/multiwindow
+            - link "Links" [ref=e74] [cursor=pointer]:
+              - /url: /concepts/links
+            - link "Table" [ref=e75] [cursor=pointer]:
+              - /url: /concepts/table
+        - generic [ref=e76]:
+          - heading "Challenges" [level=6] [ref=e77]
+          - generic [ref=e78]:
+            - link "E-commerce Pagination" [ref=e79] [cursor=pointer]:
+              - /url: /challenges/product-listing-pagination
+            - link "E-commerce Filters" [ref=e80] [cursor=pointer]:
+              - /url: /challenges/product-filtering
+        - generic [ref=e81]:
+          - heading "Blogs" [level=6] [ref=e82]
+          - generic [ref=e83]:
+            - link "HTML Basics" [ref=e84] [cursor=pointer]:
+              - /url: /blogs/html-basics
+            - link "Locator Strategies" [ref=e85] [cursor=pointer]:
+              - /url: /blogs/Locators
+      - generic [ref=e87]:
+        - link "LinkedIn" [ref=e88] [cursor=pointer]:
+          - /url: https://www.linkedin.com/company/cnarios
+          - img [ref=e89]
+          - text: LinkedIn
+        - link "YouTube" [ref=e91] [cursor=pointer]:
+          - /url: https://www.youtube.com/channel/UC2F8fdGwKP18tyqEKtGRxeg
+          - img [ref=e92]
+          - text: YouTube
+        - link "Email" [ref=e94] [cursor=pointer]:
+          - /url: mailto:cnaarios.@gmail.com
+          - img [ref=e95]
+          - text: Email
+    - paragraph [ref=e99]:
+      - text: © 2026 Cnarios. All rights reserved. | Designed by
+      - strong [ref=e100]:
+        - link "END Prasad" [ref=e101] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/prasad-e-n-d/
+```
+
+# Test source
+
+```ts
+  1   | import { test, expect } from '@playwright/test';
+  2   | import { ConceptsPage } from '../pages/ConceptsPage';
+  3   | 
+  4   | /**
+  5   |  * Concepts Page Test Suite
+  6   |  */
+  7   | 
+  8   | test.describe('Concepts Page Tests', () => {
+  9   |   let conceptsPage: ConceptsPage;
+  10  | 
+  11  |   test.beforeEach(async ({ page }) => {
+  12  |     conceptsPage = new ConceptsPage(page);
+  13  |   });
+  14  | 
+  15  |   test('TC054: Iframe concept page loads successfully', async () => {
+  16  |     await conceptsPage.goto('iframe');
+  17  |     await expect(conceptsPage.pageHeading).toBeVisible();
+  18  |     await expect(conceptsPage.page).toHaveURL(/.*\/concepts\/iframe$/);
+  19  |   });
+  20  | 
+  21  |   test('TC055: Concepts page displays Concept tab', async () => {
+  22  |     await conceptsPage.goto('iframe');
+  23  |     await expect(conceptsPage.conceptTab).toBeVisible();
+  24  |   });
+  25  | 
+  26  |   test('TC056: Concepts page displays Try It Yourself tab', async () => {
+  27  |     await conceptsPage.goto('iframe');
+  28  |     await expect(conceptsPage.tryItYourselfTab).toBeVisible();
+  29  |   });
+  30  | 
+  31  |   test('TC057: Concepts page displays Test Cases tab', async () => {
+  32  |     await conceptsPage.goto('iframe');
+  33  |     await expect(conceptsPage.testCasesTab).toBeVisible();
+  34  |   });
+  35  | 
+  36  |   test('TC058: All tabs are visible on concept page', async () => {
+  37  |     await conceptsPage.goto('iframe');
+  38  |     await expect(conceptsPage.conceptTab).toBeVisible();
+  39  |     await expect(conceptsPage.tryItYourselfTab).toBeVisible();
+  40  |     await expect(conceptsPage.testCasesTab).toBeVisible();
+  41  |   });
+  42  | 
+  43  |   test('TC059: Multiwindow concept page loads successfully', async () => {
+  44  |     await conceptsPage.goto('multiwindow');
+  45  |     await expect(conceptsPage.pageHeading).toBeVisible();
+  46  |     await expect(conceptsPage.page).toHaveURL(/.*\/concepts\/multiwindow$/);
+  47  |   });
+  48  | 
+  49  |   test('TC060: Links concept page loads successfully', async () => {
+  50  |     await conceptsPage.goto('links');
+  51  |     await expect(conceptsPage.pageHeading).toBeVisible();
+  52  |     await expect(conceptsPage.page).toHaveURL(/.*\/concepts\/links$/);
+  53  |   });
+  54  | 
+  55  |   test('TC061: Table concept page loads successfully', async () => {
+  56  |     await conceptsPage.goto('table');
+  57  |     await expect(conceptsPage.pageHeading).toBeVisible();
+  58  |     await expect(conceptsPage.page).toHaveURL(/.*\/concepts\/table$/);
+  59  |   });
+  60  | 
+  61  |   test('TC062: Concept tab switching works correctly', async () => {
+  62  |     await conceptsPage.goto('iframe');
+  63  |     await conceptsPage.clickTryItYourselfTab();
+  64  |     await expect(conceptsPage.tryItYourselfTab).toHaveAttribute('aria-selected', 'true');
+  65  |   });
+  66  | 
+  67  |   test('TC063: Try It Yourself tab can be selected', async () => {
+  68  |     await conceptsPage.goto('iframe');
+  69  |     await conceptsPage.clickTryItYourselfTab();
+  70  |     await expect(conceptsPage.tryItYourselfTab).toHaveAttribute('aria-selected', 'true');
+  71  |   });
+  72  | 
+  73  |   test('TC064: Test Cases tab can be selected', async () => {
+  74  |     await conceptsPage.goto('iframe');
+  75  |     await conceptsPage.clickTestCasesTab();
+  76  |     await expect(conceptsPage.testCasesTab).toHaveAttribute('aria-selected', 'true');
+  77  |   });
+  78  | 
+  79  |   test('TC065: Page heading text is displayed', async () => {
+  80  |     await conceptsPage.goto('iframe');
+  81  |     await expect(conceptsPage.pageHeading).toBeVisible();
+  82  |   });
+  83  | 
+  84  |   test('TC066: Concept tab is initially selected', async () => {
+  85  |     await conceptsPage.goto('iframe');
+  86  |     await expect(conceptsPage.conceptTab).toHaveAttribute('aria-selected', 'true');
+  87  |   });
+  88  | 
+  89  |   test('TC067: Overview section is visible', async () => {
+  90  |     await conceptsPage.goto('iframe');
+  91  |     await expect(conceptsPage.page.locator('[data-section="overview"]')).toBeVisible();
+  92  |   });
+  93  | 
+  94  |   test('TC068: Usecases section is visible', async () => {
+  95  |     await conceptsPage.goto('iframe');
+> 96  |     await expect(conceptsPage.page.locator('[data-section="usecases"]')).toBeVisible();
+      |                                                                          ^ Error: expect(locator).toBeVisible() failed
+  97  |   });
+  98  | 
+  99  |   test('TC069: Important notes are displayed', async () => {
+  100 |     await conceptsPage.goto('iframe');
+  101 |     await expect(conceptsPage.page.locator('[data-role="important-notes"]')).toBeVisible();
+  102 |   });
+  103 | 
+  104 |   test('TC070: Breadcrumb navigation is present', async () => {
+  105 |     await conceptsPage.goto('iframe');
+  106 |     const breadcrumb = await conceptsPage.page.locator('[data-role="breadcrumb"]').getAttribute('href');
+  107 |     expect(breadcrumb).toContain('concepts');
+  108 |   });
+  109 | 
+  110 |   test('TC071: Navigation is visible on concepts page', async () => {
+  111 |     await conceptsPage.goto('iframe');
+  112 |     await expect(conceptsPage.page.locator('nav')).toBeVisible();
+  113 |   });
+  114 | 
+  115 |   test('TC072: Footer is visible on concepts page', async () => {
+  116 |     await conceptsPage.goto('iframe');
+  117 |     await expect(conceptsPage.page.locator('footer')).toBeVisible();
+  118 |   });
+  119 | 
+  120 |   test('TC073: Navigate between different concepts', async () => {
+  121 |     await conceptsPage.goto('iframe');
+  122 |     await expect(conceptsPage.page).toHaveURL(/.*iframe/);
+  123 | 
+  124 |     await conceptsPage.navigateToConcept('links');
+  125 |     await expect(conceptsPage.page).toHaveURL(/.*links/);
+  126 |   });
+  127 | });
+  128 | 
+```

@@ -15,106 +15,90 @@ test.describe('Interview Questions Page Tests', () => {
   });
 
   test('TC036: Interview questions page loads successfully', async () => {
-    const isLoaded = await interviewPage.verifyPageLoaded();
-    expect(isLoaded).toBeTruthy();
-
-    const currentURL = await interviewPage.getCurrentURL();
-    expect(currentURL).toMatch(/.*\/interview-questions$/);
+    await expect(interviewPage.pageHeading).toBeVisible();
+    await expect(interviewPage.page).toHaveURL(/.*\/interview-questions$/);
   });
 
   test('TC037: Interview questions page displays search box', async () => {
-    const isVisible = await interviewPage.searchInput.isVisible();
-    expect(isVisible).toBeTruthy();
+    await expect(interviewPage.searchInput).toBeVisible();
   });
 
   test('TC038: Search functionality filters interview questions', async () => {
     await interviewPage.searchQuestions('framework');
     await interviewPage.page.waitForTimeout(1000);
-    
-    const questionsDisplayed = await interviewPage.verifyQuestionsDisplayed();
-    expect(questionsDisplayed).toBeTruthy();
+    await expect(interviewPage.page.locator('ul li, div[class*="list"] div').first()).toHaveCount(1);
   });
 
   test('TC039: Search input accepts user input', async () => {
     await interviewPage.searchQuestions('selenium');
-    const inputValue = await interviewPage.getSearchInputValue();
-    expect(inputValue).toBe('selenium');
+    await expect(interviewPage.searchInput).toHaveValue('selenium');
   });
 
   test('TC040: Company filter is available and clickable', async () => {
-    const isVisible = await interviewPage.companyFilter.isVisible();
-    expect(isVisible).toBeTruthy();
+    await expect(interviewPage.companyFilter).toBeVisible();
+    await expect(interviewPage.companyFilter).toBeEnabled();
   });
 
   test('TC041: Topic filter is available and clickable', async () => {
-    const isVisible = await interviewPage.topicFilter.isVisible();
-    expect(isVisible).toBeTruthy();
+    await expect(interviewPage.topicFilter).toBeVisible();
+    await expect(interviewPage.topicFilter).toBeEnabled();
   });
 
   test('TC042: Difficulty filter is available and clickable', async () => {
-    const isVisible = await interviewPage.difficultyFilter.isVisible();
-    expect(isVisible).toBeTruthy();
+    await expect(interviewPage.difficultyFilter).toBeVisible();
+    await expect(interviewPage.difficultyFilter).toBeEnabled();
   });
 
   test('TC043: Sort By filter is available with default selection', async () => {
-    const isVisible = await interviewPage.sortByFilter.isVisible();
-    expect(isVisible).toBeTruthy();
+    await expect(interviewPage.sortByFilter).toBeVisible();
   });
 
   test('TC044: Clear Filters button is visible', async () => {
-    const isVisible = await interviewPage.clearFiltersBtn.isVisible();
-    expect(isVisible).toBeTruthy();
+    await expect(interviewPage.clearFiltersBtn).toBeVisible();
   });
 
   test('TC045: Interview questions are displayed', async () => {
-    const questionsDisplayed = await interviewPage.verifyQuestionsDisplayed();
-    expect(questionsDisplayed).toBeTruthy();
+    await expect(interviewPage.page.locator('ul li, div[class*="list"] div').first()).toHaveCount(1);
   });
 
   test('TC046: All filter elements are visible', async () => {
-    const allFiltersVisible = await interviewPage.verifyFilterElements();
-    expect(allFiltersVisible).toBeTruthy();
+    await expect(interviewPage.companyFilter).toBeVisible();
+    await expect(interviewPage.topicFilter).toBeVisible();
+    await expect(interviewPage.difficultyFilter).toBeVisible();
   });
 
   test('TC047: Clear search input functionality', async () => {
     await interviewPage.searchQuestions('test');
     await interviewPage.clearSearchInput();
-    
-    const inputValue = await interviewPage.getSearchInputValue();
-    expect(inputValue).toBe('');
+    await expect(interviewPage.searchInput).toHaveValue('');
   });
 
   test('TC048: Question count is displayed', async () => {
-    const count = await interviewPage.getQuestionCount();
-    expect(count).toBeGreaterThan(0);
+    const questions = interviewPage.page.locator('ul li, [class*="question"], [class*="item"]');
+    await expect(questions.first()).toHaveCount(1);
   });
 
   test('TC049: Page heading text is correct', async () => {
-    const headingText = await interviewPage.getPageHeadingText();
-    expect(headingText).toContain('Automation Interview Questions');
+    await expect(interviewPage.pageHeading).toContainText('Automation Interview Questions');
   });
 
   test('TC050: Back button navigates to explore page', async () => {
     await interviewPage.goBack();
-    const currentURL = await interviewPage.getCurrentURL();
-    expect(currentURL).toContain('explore');
+    await expect(interviewPage.page).toHaveURL(/.*explore/);
   });
 
   test('TC051: Navigation is visible on interview questions page', async () => {
-    const navVisible = await interviewPage.isNavigationVisible();
-    expect(navVisible).toBeTruthy();
+    await expect(interviewPage.navigationBar).toBeVisible();
   });
 
   test('TC052: Footer is visible on interview questions page', async () => {
-    const footerVisible = await interviewPage.isFooterVisible();
-    expect(footerVisible).toBeTruthy();
+    await expect(interviewPage.footer).toBeVisible();
   });
 
   test('TC053: Multiple search terms can be tested', async () => {
     for (const keyword of TEST_DATA.SEARCH_KEYWORDS.slice(0, 3)) {
       await interviewPage.searchQuestions(keyword);
-      const inputValue = await interviewPage.getSearchInputValue();
-      expect(inputValue).toBe(keyword);
+      await expect(interviewPage.searchInput).toHaveValue(keyword);
     }
   });
 });
