@@ -1,0 +1,382 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: e2e.spec.ts >> End-to-End User Journeys >> TC112: Complete user journey - Home to Interviews with Search
+- Location: tests\e2e.spec.ts:47:7
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: locator('[data-role="question"]').first()
+Expected: visible
+Timeout: 10000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" with timeout 10000ms
+  - waiting for locator('[data-role="question"]').first()
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - generic:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "cnarios logo" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "cnarios logo" [ref=e8]
+        - generic [ref=e9]:
+          - link "Features" [ref=e10] [cursor=pointer]:
+            - /url: /#features
+          - link "How it works?" [ref=e11] [cursor=pointer]:
+            - /url: /#how-it-works
+          - link "Contact Us" [ref=e12] [cursor=pointer]:
+            - /url: /#contact-us
+          - link "Blogs" [ref=e13] [cursor=pointer]:
+            - /url: /blogs
+    - navigation
+  - generic [ref=e15]:
+    - generic [ref=e16]:
+      - link "Back" [ref=e17] [cursor=pointer]:
+        - /url: /explore
+        - button "Back" [ref=e18]:
+          - img [ref=e20]
+          - text: Back
+      - heading "Automation Interview Questions" [level=1] [ref=e22]
+      - heading "Comprehensive collection of frequently asked interview questions in the automation testing field. Filter by company, topic, difficulty, or search for specific questions to prepare effectively for your next interview." [level=6] [ref=e23]
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - img [ref=e27]
+        - heading "Filters & Search" [level=6] [ref=e29]
+      - generic [ref=e30]:
+        - generic [ref=e32]:
+          - img [ref=e33]
+          - textbox "Search questions..." [active] [ref=e35]: framework
+          - group
+        - generic [ref=e36]:
+          - generic: Company
+          - generic [ref=e37]:
+            - combobox [ref=e38] [cursor=pointer]
+            - textbox
+            - img
+            - group:
+              - generic: Company
+        - generic [ref=e39]:
+          - generic: Topic
+          - generic [ref=e40]:
+            - combobox [ref=e41] [cursor=pointer]
+            - textbox
+            - img
+            - group:
+              - generic: Topic
+        - generic [ref=e42]:
+          - generic: Difficulty
+          - generic [ref=e43]:
+            - combobox [ref=e44] [cursor=pointer]
+            - textbox
+            - img
+            - group:
+              - generic: Difficulty
+        - generic [ref=e45]:
+          - generic [ref=e46]: Sort By
+          - generic [ref=e47]:
+            - combobox [ref=e48] [cursor=pointer]: Most Asked
+            - textbox: frequency
+            - img
+            - group:
+              - generic: Sort By
+        - button "Clear Filters" [ref=e50] [cursor=pointer]
+    - heading "Showing 3 questions" [level=6] [ref=e52]
+    - generic [ref=e53]:
+      - generic [ref=e56] [cursor=pointer]:
+        - generic [ref=e57]:
+          - generic [ref=e58]:
+            - button [ref=e59]:
+              - img [ref=e60]
+            - heading "Walk me through your automation framework – which tools, design patterns, and reporting mechanisms do you use?" [level=6] [ref=e62]:
+              - img [ref=e63]
+              - text: Walk me through your automation framework – which tools, design patterns, and reporting mechanisms do you use?
+            - img "Frequently Asked" [ref=e65]
+          - generic [ref=e68]:
+            - paragraph [ref=e69]: Asked 23 times
+            - paragraph [ref=e70]: 08/25
+            - generic [ref=e72]: Medium
+            - generic [ref=e74]: Framework
+          - generic [ref=e75]:
+            - generic [ref=e77]: Deloitte
+            - generic [ref=e79]: Accenture
+            - generic [ref=e81]: QualityKiosk
+            - generic [ref=e83]: Infosys
+            - generic [ref=e85]: Nagarro
+            - generic [ref=e87]: Wipro
+        - button [ref=e88]:
+          - img [ref=e89]
+      - generic [ref=e93] [cursor=pointer]:
+        - generic [ref=e94]:
+          - generic [ref=e95]:
+            - button [ref=e96]:
+              - img [ref=e97]
+            - heading "Tell me some exceptions you have faced while writing the framework." [level=6] [ref=e99]:
+              - img [ref=e100]
+              - text: Tell me some exceptions you have faced while writing the framework.
+          - generic [ref=e102]:
+            - paragraph [ref=e103]: Asked 6 times
+            - paragraph [ref=e104]: 08/25
+            - generic [ref=e106]: Medium
+            - generic [ref=e108]: Selenium
+          - generic [ref=e109]:
+            - generic [ref=e111]: Infosys
+            - generic [ref=e113]: TCS
+            - generic [ref=e115]: Highradius
+            - generic [ref=e117]: Deliotte
+        - button [ref=e118]:
+          - img [ref=e119]
+      - generic [ref=e123] [cursor=pointer]:
+        - generic [ref=e124]:
+          - generic [ref=e125]:
+            - button [ref=e126]:
+              - img [ref=e127]
+            - heading "What are the benefits of test automation frameworks?" [level=6] [ref=e129]:
+              - img [ref=e130]
+              - text: What are the benefits of test automation frameworks?
+          - generic [ref=e132]:
+            - paragraph [ref=e133]: Asked 5 times
+            - paragraph [ref=e134]: 03/25
+            - generic [ref=e136]: Easy
+            - generic [ref=e138]: Frameworks
+          - generic [ref=e139]:
+            - generic [ref=e141]: TCS
+            - generic [ref=e143]: Wipro
+        - button [ref=e144]:
+          - img [ref=e145]
+  - contentinfo [ref=e147]:
+    - separator [ref=e148]
+    - generic [ref=e149]:
+      - link "cnarios logo" [ref=e151] [cursor=pointer]:
+        - /url: /
+        - img "cnarios logo" [ref=e152]
+      - generic [ref=e153]:
+        - generic [ref=e154]:
+          - heading "Concepts" [level=6] [ref=e155]
+          - generic [ref=e156]:
+            - link "Iframes" [ref=e157] [cursor=pointer]:
+              - /url: /concepts/iframe
+            - link "Multi Window" [ref=e158] [cursor=pointer]:
+              - /url: /concepts/multiwindow
+            - link "Links" [ref=e159] [cursor=pointer]:
+              - /url: /concepts/links
+            - link "Table" [ref=e160] [cursor=pointer]:
+              - /url: /concepts/table
+        - generic [ref=e161]:
+          - heading "Challenges" [level=6] [ref=e162]
+          - generic [ref=e163]:
+            - link "E-commerce Pagination" [ref=e164] [cursor=pointer]:
+              - /url: /challenges/product-listing-pagination
+            - link "E-commerce Filters" [ref=e165] [cursor=pointer]:
+              - /url: /challenges/product-filtering
+        - generic [ref=e166]:
+          - heading "Blogs" [level=6] [ref=e167]
+          - generic [ref=e168]:
+            - link "HTML Basics" [ref=e169] [cursor=pointer]:
+              - /url: /blogs/html-basics
+            - link "Locator Strategies" [ref=e170] [cursor=pointer]:
+              - /url: /blogs/Locators
+      - generic [ref=e172]:
+        - link "LinkedIn" [ref=e173] [cursor=pointer]:
+          - /url: https://www.linkedin.com/company/cnarios
+          - img [ref=e174]
+          - text: LinkedIn
+        - link "YouTube" [ref=e176] [cursor=pointer]:
+          - /url: https://www.youtube.com/channel/UC2F8fdGwKP18tyqEKtGRxeg
+          - img [ref=e177]
+          - text: YouTube
+        - link "Email" [ref=e179] [cursor=pointer]:
+          - /url: mailto:cnaarios.@gmail.com
+          - img [ref=e180]
+          - text: Email
+    - paragraph [ref=e184]:
+      - text: © 2026 Cnarios. All rights reserved. | Designed by
+      - strong [ref=e185]:
+        - link "END Prasad" [ref=e186] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/prasad-e-n-d/
+```
+
+# Test source
+
+```ts
+  1   | import { test, expect } from '@playwright/test';
+  2   | import { HomePage } from '../pages/HomePage';
+  3   | import { ExplorePage } from '../pages/ExplorePage';
+  4   | import { InterviewQuestionsPage } from '../pages/InterviewQuestionsPage';
+  5   | import { ConceptsPage } from '../pages/ConceptsPage';
+  6   | import { ChallengePage } from '../pages/ChallengePage';
+  7   | import { BlogsPage } from '../pages/BlogsPage';
+  8   | 
+  9   | /**
+  10  |  * End-to-End User Journey Tests
+  11  |  * Tests complete user workflows across the application
+  12  |  */
+  13  | 
+  14  | test.describe('End-to-End User Journeys', () => {
+  15  |   test('TC110: Complete user journey - Home to Explore to Concepts', async ({ page }) => {
+  16  |     const homePage = new HomePage(page);
+  17  |     const explorePage = new ExplorePage(page);
+  18  |     const conceptsPage = new ConceptsPage(page);
+  19  | 
+  20  |     // Start at home
+  21  |     await homePage.goto();
+  22  |     await expect(homePage.heroHeading).toBeVisible();
+  23  | 
+  24  |     // Navigate to explore
+  25  |     await homePage.clickStartExploring();
+  26  |     await expect(explorePage.pageHeading).toBeVisible();
+  27  | 
+  28  |     // Navigate to concepts
+  29  |     await explorePage.clickStartLearning();
+  30  |     await expect(page).toHaveURL(/.*concepts/);
+  31  |   });
+  32  | 
+  33  |   test('TC111: Complete user journey - Home to Challenges', async ({ page }) => {
+  34  |     const homePage = new HomePage(page);
+  35  |     const challengePage = new ChallengePage(page);
+  36  | 
+  37  |     // Start at home
+  38  |     await homePage.goto();
+  39  |     await expect(homePage.heroHeading).toBeVisible();
+  40  | 
+  41  |     // Navigate to challenges
+  42  |     await homePage.clickChallenges();
+  43  |     await expect(challengePage.pageHeading).toBeVisible();
+  44  |     await expect(page).toHaveURL(/.*\/challenges$/);
+  45  |   });
+  46  | 
+  47  |   test('TC112: Complete user journey - Home to Interviews with Search', async ({ page }) => {
+  48  |     const homePage = new HomePage(page);
+  49  |     const explorePage = new ExplorePage(page);
+  50  |     const interviewPage = new InterviewQuestionsPage(page);
+  51  | 
+  52  |     // Start at home
+  53  |     await homePage.goto();
+  54  |     
+  55  |     // Navigate to explore
+  56  |     await homePage.clickStartExploring();
+  57  |     
+  58  |     // Navigate to interview questions
+  59  |     await explorePage.clickExploreQuestions();
+  60  |     await expect(interviewPage.pageHeading).toBeVisible();
+  61  | 
+  62  |     // Perform search
+  63  |     await interviewPage.searchQuestions('framework');
+> 64  |     await expect(interviewPage.page.locator('[data-role="question"]').first()).toBeVisible();
+      |                                                                                ^ Error: expect(locator).toBeVisible() failed
+  65  |   });
+  66  | 
+  67  |   test('TC113: Complete user journey - Home to Blogs to Article', async ({ page }) => {
+  68  |     const homePage = new HomePage(page);
+  69  |     const explorePage = new ExplorePage(page);
+  70  |     const blogsPage = new BlogsPage(page);
+  71  | 
+  72  |     // Start at home
+  73  |     await homePage.goto();
+  74  |     
+  75  |     // Navigate to explore
+  76  |     await homePage.clickStartExploring();
+  77  |     
+  78  |     // Navigate to blogs
+  79  |     await explorePage.clickReadBlogs();
+  80  |     await expect(blogsPage.pageHeading).toBeVisible();
+  81  | 
+  82  |     // Navigate to HTML Basics blog
+  83  |     await blogsPage.clickHTMLBasicsBlog();
+  84  |     await expect(blogsPage.pageHeading).toBeVisible();
+  85  |   });
+  86  | 
+  87  |   test('TC114: Complete user journey - Challenge exploration and navigation', async ({ page }) => {
+  88  |     const challengePage = new ChallengePage(page);
+  89  | 
+  90  |     // Navigate to challenges page
+  91  |     await challengePage.goto();
+  92  |     await expect(challengePage.pageHeading).toBeVisible();
+  93  | 
+  94  |     // Click on Product Filtering challenge
+  95  |     await challengePage.clickProductFilteringChallenge();
+  96  |     await expect(page).toHaveURL(/.*product-filtering/);
+  97  | 
+  98  |     // Verify challenge content
+  99  |     await expect(challengePage.pageHeading).toBeVisible();
+  100 |   });
+  101 | 
+  102 |   test('TC115: Complete user journey - Concept exploration with tab switching', async ({ page }) => {
+  103 |     const conceptsPage = new ConceptsPage(page);
+  104 | 
+  105 |     // Navigate to iframe concept
+  106 |     await conceptsPage.goto('iframe');
+  107 |     await expect(conceptsPage.pageHeading).toBeVisible();
+  108 | 
+  109 |     // Switch to Try It Yourself tab
+  110 |     await conceptsPage.clickTryItYourselfTab();
+  111 |     await expect(conceptsPage.tryItYourselfTab).toHaveAttribute('aria-selected', 'true');
+  112 | 
+  113 |     // Switch to Test Cases tab
+  114 |     await conceptsPage.clickTestCasesTab();
+  115 |     await expect(conceptsPage.testCasesTab).toHaveAttribute('aria-selected', 'true');
+  116 | 
+  117 |     // Switch back to Concept tab
+  118 |     await conceptsPage.clickConceptTab();
+  119 |     await expect(conceptsPage.conceptTab).toHaveAttribute('aria-selected', 'true');
+  120 |   });
+  121 | 
+  122 |   test('TC116: Navigation flow - Home -> Explore -> Back to Home', async ({ page }) => {
+  123 |     const homePage = new HomePage(page);
+  124 |     const explorePage = new ExplorePage(page);
+  125 | 
+  126 |     // Start at home
+  127 |     await homePage.goto();
+  128 |     await expect(page).toHaveURL(/^https:\/\/www\.cnarios\.com\/$|^https:\/\/www\.cnarios\.com$/);
+  129 | 
+  130 |     // Navigate to explore
+  131 |     await homePage.clickStartExploring();
+  132 |     await expect(page).toHaveURL(/.*explore/);
+  133 | 
+  134 |     // Go back to home
+  135 |     await explorePage.goBack();
+  136 |     await expect(page).toHaveURL(/^https:\/\/www\.cnarios\.com\/$|^https:\/\/www\.cnarios\.com$/);
+  137 |   });
+  138 | 
+  139 |   test('TC117: Filter testing - Interview questions filter interaction', async ({ page }) => {
+  140 |     const interviewPage = new InterviewQuestionsPage(page);
+  141 | 
+  142 |     // Navigate to interview questions
+  143 |     await interviewPage.goto();
+  144 |     await expect(interviewPage.pageHeading).toBeVisible();
+  145 | 
+  146 |     // Test search with multiple keywords
+  147 |     for (const keyword of ['selenium', 'xpath', 'css']) {
+  148 |       await interviewPage.searchQuestions(keyword);
+  149 |       await expect(interviewPage.searchInput).toHaveValue(keyword);
+  150 |     }
+  151 | 
+  152 |     // Clear search
+  153 |     await interviewPage.clearSearchInput();
+  154 |     await expect(interviewPage.searchInput).toHaveValue('');
+  155 |   });
+  156 | 
+  157 |   test('TC118: Multi-concept navigation', async ({ page }) => {
+  158 |     const conceptsPage = new ConceptsPage(page);
+  159 | 
+  160 |     const concepts = ['iframe', 'multiwindow', 'links', 'table'];
+  161 | 
+  162 |     for (const concept of concepts) {
+  163 |       await conceptsPage.navigateToConcept(concept);
+  164 |       await expect(page).toHaveURL(new RegExp(`.*${concept}`));
+```

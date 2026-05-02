@@ -1,0 +1,289 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: home.spec.ts >> Home Page Tests >> TC016: Navigation is visible on home page
+- Location: tests\home.spec.ts:91:7
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: locator('nav')
+Expected: visible
+Error: strict mode violation: locator('nav') resolved to 2 elements:
+    1) <nav class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-1stzd1v">…</nav> aka getByRole('navigation').filter({ hasText: 'FeaturesHow it works?Contact' })
+    2) <nav class="MuiBox-root css-0"></nav> aka getByRole('navigation').filter({ hasText: /^$/ })
+
+Call log:
+  - Expect "toBeVisible" with timeout 10000ms
+  - waiting for locator('nav')
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - generic:
+    - navigation [ref=e4]:
+      - generic [ref=e5]:
+        - link "cnarios logo" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "cnarios logo" [ref=e8]
+        - generic [ref=e9]:
+          - link "Features" [ref=e10] [cursor=pointer]:
+            - /url: /#features
+          - link "How it works?" [ref=e11] [cursor=pointer]:
+            - /url: /#how-it-works
+          - link "Contact Us" [ref=e12] [cursor=pointer]:
+            - /url: /#contact-us
+          - link "Blogs" [ref=e13] [cursor=pointer]:
+            - /url: /blogs
+    - navigation
+  - main [ref=e14]:
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - heading "Practice Automation Testing the Way It Happens in the Real World" [level=1] [ref=e18]
+        - paragraph [ref=e19]: Cnarios is a free platform for testers to practice automation using real-life scenarios, industry-standard test cases, and bug-finding challenges. Learn concepts, sharpen your skills, and prepare for interviews — all in one place.
+        - generic [ref=e20]:
+          - link "Start Exploring" [ref=e21] [cursor=pointer]:
+            - /url: /explore
+            - button "Start Exploring" [ref=e22]
+          - link "Challenges" [ref=e23] [cursor=pointer]:
+            - /url: /challenges
+            - button "Challenges" [ref=e24]
+      - img "Automation Illustration" [ref=e26]
+  - generic [ref=e27]:
+    - paragraph [ref=e28]: features
+    - generic [ref=e29]:
+      - link "Practice real world scenarios image Hands-On Practice Master automation by practicing every possible real-world scenario." [ref=e30] [cursor=pointer]:
+        - /url: /concepts
+        - img "Practice real world scenarios image" [ref=e31]
+        - heading "Hands-On Practice" [level=3] [ref=e32]
+        - paragraph [ref=e33]: Master automation by practicing every possible real-world scenario.
+      - link "interview questions image Interview Questions Prepare smarter with real interview-style questions and challenges." [ref=e34] [cursor=pointer]:
+        - /url: /interview-questions
+        - img "interview questions image" [ref=e35]
+        - heading "Interview Questions" [level=3] [ref=e36]
+        - paragraph [ref=e37]: Prepare smarter with real interview-style questions and challenges.
+      - link "Challenges image Test Your Skills Face challenges and interview questions to prepare for the real world." [ref=e38] [cursor=pointer]:
+        - /url: /challenges
+        - img "Challenges image" [ref=e39]
+        - heading "Test Your Skills" [level=3] [ref=e40]
+        - paragraph [ref=e41]: Face challenges and interview questions to prepare for the real world.
+  - generic [ref=e42]:
+    - paragraph [ref=e43]: How it works?
+    - generic [ref=e45]:
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e49]: "1"
+          - generic [ref=e50]:
+            - paragraph [ref=e51]: Search for the topic you want to master
+            - paragraph [ref=e52]: Go to explore section → Click on / search the topic you want to learn
+        - img "Search Illustration" [ref=e54]
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - generic [ref=e58]: "2"
+          - generic [ref=e59]:
+            - paragraph [ref=e60]: Understand the Concept
+            - paragraph [ref=e61]: Read the on point description about the topic and also real-world examples with visuals
+        - img "Reading Illustration" [ref=e63]
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - generic [ref=e67]: "3"
+          - generic [ref=e68]:
+            - paragraph [ref=e69]: Practice the Scenario
+            - paragraph [ref=e70]: Practice the meaningful scenarios what actual automation engineers automate with proper testcases including positive and negative scenarios.
+        - img "Practice Illustration" [ref=e72]
+  - generic [ref=e73]:
+    - heading "Share. Suggest. Shape." [level=4] [ref=e74]
+    - paragraph [ref=e75]: Whether it's a broken flow, a cool suggestion, or your favorite interview challenge — we're all ears.
+    - link "Drop Us a Line" [ref=e76] [cursor=pointer]:
+      - /url: mailto:cnaarios@gmail.com?subject=Hello%20from%20Your%20Automation%20Playground&body=Hi%20team%2C%0A%0AI%20wanted%20to%20share%2Fsuggest...
+      - img [ref=e78]
+      - text: Drop Us a Line
+  - contentinfo [ref=e80]:
+    - separator [ref=e81]
+    - generic [ref=e82]:
+      - link "cnarios logo" [ref=e84] [cursor=pointer]:
+        - /url: /
+        - img "cnarios logo" [ref=e85]
+      - generic [ref=e86]:
+        - generic [ref=e87]:
+          - heading "Concepts" [level=6] [ref=e88]
+          - generic [ref=e89]:
+            - link "Iframes" [ref=e90] [cursor=pointer]:
+              - /url: /concepts/iframe
+            - link "Multi Window" [ref=e91] [cursor=pointer]:
+              - /url: /concepts/multiwindow
+            - link "Links" [ref=e92] [cursor=pointer]:
+              - /url: /concepts/links
+            - link "Table" [ref=e93] [cursor=pointer]:
+              - /url: /concepts/table
+        - generic [ref=e94]:
+          - heading "Challenges" [level=6] [ref=e95]
+          - generic [ref=e96]:
+            - link "E-commerce Pagination" [ref=e97] [cursor=pointer]:
+              - /url: /challenges/product-listing-pagination
+            - link "E-commerce Filters" [ref=e98] [cursor=pointer]:
+              - /url: /challenges/product-filtering
+        - generic [ref=e99]:
+          - heading "Blogs" [level=6] [ref=e100]
+          - generic [ref=e101]:
+            - link "HTML Basics" [ref=e102] [cursor=pointer]:
+              - /url: /blogs/html-basics
+            - link "Locator Strategies" [ref=e103] [cursor=pointer]:
+              - /url: /blogs/Locators
+      - generic [ref=e105]:
+        - link "LinkedIn" [ref=e106] [cursor=pointer]:
+          - /url: https://www.linkedin.com/company/cnarios
+          - img [ref=e107]
+          - text: LinkedIn
+        - link "YouTube" [ref=e109] [cursor=pointer]:
+          - /url: https://www.youtube.com/channel/UC2F8fdGwKP18tyqEKtGRxeg
+          - img [ref=e110]
+          - text: YouTube
+        - link "Email" [ref=e112] [cursor=pointer]:
+          - /url: mailto:cnaarios.@gmail.com
+          - img [ref=e113]
+          - text: Email
+    - paragraph [ref=e117]:
+      - text: © 2026 Cnarios. All rights reserved. | Designed by
+      - strong [ref=e118]:
+        - link "END Prasad" [ref=e119] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/prasad-e-n-d/
+```
+
+# Test source
+
+```ts
+  1   | import { test, expect } from '@playwright/test';
+  2   | import { HomePage } from '../pages/HomePage';
+  3   | 
+  4   | /**
+  5   |  * Home Page Test Suite
+  6   |  * Tests for the landing/home page of Cnarios
+  7   |  */
+  8   | 
+  9   | test.describe('Home Page Tests', () => {
+  10  |   let homePage: HomePage;
+  11  | 
+  12  |   test.beforeEach(async ({ page }) => {
+  13  |     homePage = new HomePage(page);
+  14  |     await homePage.goto();
+  15  |   });
+  16  | 
+  17  |   test('TC001: Home page loads successfully', async () => {
+  18  |     await expect(homePage.heroHeading).toBeVisible();
+  19  |     const title = await homePage.page.title();
+  20  |     expect(title).toContain('Cnarios');
+  21  |   });
+  22  | 
+  23  |   test('TC002: Home page has hero section with correct elements', async () => {
+  24  |     await expect(homePage.heroHeading).toBeVisible();
+  25  |     await expect(homePage.startExploringBtn).toBeVisible();
+  26  |   });
+  27  | 
+  28  |   test('TC003: Logo on home page is clickable and navigates to home', async () => {
+  29  |     await expect(homePage.logo).toBeVisible();
+  30  |     await expect(homePage.logo).toBeEnabled();
+  31  |   });
+  32  | 
+  33  |   test('TC004: Start Exploring button is visible and clickable', async () => {
+  34  |     await expect(homePage.startExploringBtn).toBeVisible();
+  35  |     await expect(homePage.startExploringBtn).toBeEnabled();
+  36  |   });
+  37  | 
+  38  |   test('TC005: Challenges button is visible and clickable', async () => {
+  39  |     await expect(homePage.challengesBtn).toBeVisible();
+  40  |     await expect(homePage.challengesBtn).toBeEnabled();
+  41  |   });
+  42  | 
+  43  |   test('TC006: Start Exploring button navigates to explore page', async () => {
+  44  |     await homePage.clickStartExploring();
+  45  |     await expect(homePage.page).toHaveURL(/.*\/explore$/);
+  46  |   });
+  47  | 
+  48  |   test('TC007: Challenges button navigates to challenges page', async () => {
+  49  |     await homePage.clickChallenges();
+  50  |     await expect(homePage.page).toHaveURL(/.*\/challenges$/);
+  51  |   });
+  52  | 
+  53  |   test('TC008: Features section displays all feature cards', async () => {
+  54  |     await expect(homePage.handsOnPracticeLink).toBeVisible();
+  55  |     await expect(homePage.interviewQuestionsLink).toBeVisible();
+  56  |     await expect(homePage.challengesCardLink).toBeVisible();
+  57  |   });
+  58  | 
+  59  |   test('TC009: Hands-On Practice card is clickable', async () => {
+  60  |     await expect(homePage.handsOnPracticeLink).toBeVisible();
+  61  |     await expect(homePage.handsOnPracticeLink).toBeEnabled();
+  62  |   });
+  63  | 
+  64  |   test('TC010: Interview Questions card is clickable', async () => {
+  65  |     await expect(homePage.interviewQuestionsLink).toBeVisible();
+  66  |     await expect(homePage.interviewQuestionsLink).toBeEnabled();
+  67  |   });
+  68  | 
+  69  |   test('TC011: Challenges card is clickable', async () => {
+  70  |     await expect(homePage.challengesCardLink).toBeVisible();
+  71  |     await expect(homePage.challengesCardLink).toBeEnabled();
+  72  |   });
+  73  | 
+  74  |   test('TC012: Features link in header navigates to features section', async () => {
+  75  |     await expect(homePage.featuresNavLink).toBeVisible();
+  76  |   });
+  77  | 
+  78  |   test('TC013: How it works link in header navigates to how it works section', async () => {
+  79  |     await expect(homePage.howItWorksNavLink).toBeVisible();
+  80  |   });
+  81  | 
+  82  |   test('TC014: Contact Us link in header navigates to contact section', async () => {
+  83  |     await expect(homePage.contactUsNavLink).toBeVisible();
+  84  |   });
+  85  | 
+  86  |   test('TC015: Blogs link in header navigates to blogs page', async () => {
+  87  |     await homePage.clickBlogsNav();
+  88  |     await expect(homePage.page).toHaveURL(/.*\/blogs$/);
+  89  |   });
+  90  | 
+  91  |   test('TC016: Navigation is visible on home page', async () => {
+> 92  |     await expect(homePage.page.locator('nav')).toBeVisible();
+      |                                                ^ Error: expect(locator).toBeVisible() failed
+  93  |   });
+  94  | 
+  95  |   test('TC017: Footer is visible on home page', async () => {
+  96  |     await expect(homePage.page.locator('footer')).toBeVisible();
+  97  |   });
+  98  | 
+  99  |   test('TC018: Hero buttons are enabled and clickable', async () => {
+  100 |     await expect(homePage.startExploringBtn).toBeEnabled();
+  101 |     await expect(homePage.challengesBtn).toBeEnabled();
+  102 |   });
+  103 | 
+  104 |   test('TC019: Get and verify hero heading text', async () => {
+  105 |     await expect(homePage.heroHeading).toContainText('Practice Automation Testing');
+  106 |   });
+  107 | 
+  108 |   test('TC020: Verify How It Works section is visible', async () => {
+  109 |     await expect(homePage.page.locator('[data-section="how-it-works"]')).toBeVisible();
+  110 |   });
+  111 | 
+  112 |   test('TC021: Verify Contact section is visible', async () => {
+  113 |     await expect(homePage.page.locator('[data-section="contact"]')).toBeVisible();
+  114 |   });
+  115 | 
+  116 |   test('TC022: Verify all navigation links are visible', async () => {
+  117 |     await expect(homePage.featuresNavLink).toBeVisible();
+  118 |     await expect(homePage.howItWorksNavLink).toBeVisible();
+  119 |     await expect(homePage.contactUsNavLink).toBeVisible();
+  120 |   });
+  121 | });
+  122 | 
+```
