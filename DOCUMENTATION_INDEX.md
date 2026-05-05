@@ -43,19 +43,26 @@ You've created a professional, enterprise-grade test automation framework with *
 - Professional patterns
 - **Read Time**: 20-30 minutes
 
-#### 6. **[METHODS_REFERENCE.md](METHODS_REFERENCE.md)**
+#### 6. **[API_TESTING_GUIDE.md](API_TESTING_GUIDE.md)**
+- REST API testing with Playwright
+- APIService class usage
+- Common patterns and examples
+- Authentication and error handling
+- **Read Time**: 20-25 minutes
+
+#### 7. **[METHODS_REFERENCE.md](METHODS_REFERENCE.md)**
 - Complete list of all available methods
 - How to use each method
 - Real examples
 - **Read Time**: Reference (as needed)
 
-#### 7. **[MIGRATION_GUIDE.md](MIGRATION_GUIDE.md)**
+#### 8. **[MIGRATION_GUIDE.md](MIGRATION_GUIDE.md)**
 - How tests were built
 - Before/after comparisons
 - Evolution of the framework
 - **Read Time**: 15-20 minutes
 
-#### 8. **[HTML_REPORT_GUIDE.md](HTML_REPORT_GUIDE.md)**
+#### 9. **[HTML_REPORT_GUIDE.md](HTML_REPORT_GUIDE.md)**
 - Understanding test reports
 - How to analyze results
 - Report features
@@ -243,6 +250,7 @@ package.json             (Dependencies & npm scripts)
 | **BEGINNER_GUIDE.md** | Detailed beginner explanations | Beginners |
 | **FRAMEWORK_ARCHITECTURE.md** | How components work together | Learning structure |
 | **POM_README.md** | Page Object Model deep dive | Understanding architecture |
+| **API_TESTING_GUIDE.md** | REST API testing guide | API test developers |
 | **METHODS_REFERENCE.md** | All available methods | Developers (reference) |
 | **MIGRATION_GUIDE.md** | Evolution & patterns | Understanding decisions |
 | **HTML_REPORT_GUIDE.md** | Test reports & analysis | Viewing results |
@@ -251,7 +259,9 @@ package.json             (Dependencies & npm scripts)
 | File | Purpose | Contains |
 |------|---------|----------|
 | **tests/*.spec.ts** | What to test | 120+ test cases |
+| **tests/api.spec.ts** | API testing examples | 10+ API test cases |
 | **pages/*.ts** | How to test | 150+ methods |
+| **utils/APIService.ts** | API request handling | Reusable HTTP methods |
 | **utils/constants.ts** | Test data | Configuration & data |
 | **utils/testUtils.ts** | Helper functions | Utility methods |
 | **playwright.config.ts** | Settings | Test configuration |
@@ -307,12 +317,13 @@ expect(await page.verify()).toBeTruthy();
 | Metric | Count |
 |--------|-------|
 | **Total Tests** | 120+ |
+| **API Tests** | 10+ |
 | **Page Objects** | 7 |
 | **Methods in Pages** | 150+ |
 | **Test Suites** | 7 |
 | **Locators Defined** | 100+ |
-| **Code Files** | 14 |
-| **Documentation Files** | 8 |
+| **Code Files** | 15 |
+| **Documentation Files** | 9 |
 
 ---
 
