@@ -17,6 +17,7 @@
     "test:challenges": "playwright test tests/challenges.spec.ts",
     "test:blogs": "playwright test tests/blogs.spec.ts",
     "test:e2e": "playwright test tests/e2e.spec.ts",
+    "test:api": "playwright test tests/api.spec.ts",
     "test:all": "playwright test && playwright show-report",
     "test:chrome": "playwright test --project=chromium",
     "test:edge": "playwright test --project=\"Microsoft Edge\"",

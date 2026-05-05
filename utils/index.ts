@@ -4,6 +4,7 @@
  */
 
 export { TestUtils, NavigationHelper } from './testUtils';
+export { APIService } from './APIService';
 export {
   BASE_URL,
   NAVIGATION_PATHS,
